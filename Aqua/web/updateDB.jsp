@@ -147,7 +147,7 @@
                     }
                 }
 
-                // add the book ID to the session
+                // read the book ID from the session
                 bookid = String.valueOf(hSession.getAttribute("bookid"));
 
                 // TABLE book : query update

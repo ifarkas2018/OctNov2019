@@ -79,9 +79,13 @@ public class DelServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession hSession = AquaMethods.returnSession(request); // hSession - used to store the information about that user
         try (PrintWriter out = response.getWriter()) {
-            String prev_title = request.getParameter("prev_title"); // retrieving the title of the book
-            String prev_author = request.getParameter("prev_author"); // the author
-            String prev_isbn = request.getParameter("prev_isbn"); // ISBN
+            //String prev_title = request.getParameter("prev_title"); // retrieving the title of the book
+            //String prev_author = request.getParameter("prev_author"); // the author
+            //String prev_isbn = request.getParameter("prev_isbn"); // ISBN
+            
+            String prev_title = (String)hSession.getAttribute("prev_title");
+            String prev_author = (String)hSession.getAttribute("prev_auth");
+            String prev_isbn = (String)hSession.getAttribute("prev_isbn");
         
             // deleteSpaces: removes space characters from the begining and end of the string, and replaces 2 or more white spaces with single space
             // inside of the string

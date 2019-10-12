@@ -220,7 +220,7 @@
                                 %>    
                                         <!-- Login link on the navbar -->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="AddSessVar" onclick="cookieFillIn('login_page.jsp')">Login</a>
+                                            <a class="nav-link" href="AddSessVar" onclick="cookieFillIn('login_inf_page.jsp')">Login</a>
                                         </li>
                                 <%
                                     }

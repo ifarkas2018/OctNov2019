@@ -2,7 +2,7 @@
     Document   : upd_del_title
     Created on : 14-Mar-2019, 04:27:45
     Author     : Ingrid Farkas
-    called from update_prev.jsp
+    called from update_prev.jsp, delete_title.jsp
 --%>
 
 <!-- upd_del_title.jsp - shows the form for entering the title, author, ISBN of the book whose inform. is updated ( or deleted ) -->
@@ -40,6 +40,7 @@
                 setCookie(); // go through every input field and write its content to the cookie
             } 
             
+            
         </script>
         
         <%
@@ -47,10 +48,10 @@
             
             String source = (String)hSession2.getAttribute("source_name"); // on which page I am now
         %>
+        
+        <title> Aqua Books - <%= source %> </title>
     </head>
-    
-    <title> Aqua Books - <%= source %> </title>
-    
+  
     <body onload="setDefaults()">
         <%
             final String PAGE_NAME = "update_prev.jsp"; // page which is loaded now 
@@ -83,34 +84,14 @@
                                 &nbsp; &nbsp;
                                 <br/>
                                 <% 
-                                    out.print("<h3>" + source + "</h3>"); // source is Update Book ( for the Update ), or Delete Book ( for the Delete )                                  
+                                    out.print("<h3 class=\"text-info\">" + source + "</h3>"); // source is Update Book ( for the Update ), or Delete Book ( for the Delete )                                  
                                 %>
                                
-                                <br/> 
-                                <% if (source.equals("Update Book")) {
-                                %>
-                                    Please enter the information about the book
-                                <% } else if (source.equals("Delete Book")) {
-                                %>
-                                    Please enter the information about the book
-                                <%
-                                   }
-                                %>
+                                <br />
+                                <br />
                                 
-                                <br />
-                                <br />
-                                <% if (source.equals("Update Book")) {
-                                %>
-                                    <!-- after clicking on the button update_page.jsp is shown -->
-                                    <form id="upd_del_book" name="upd_del_book" action="update_page.jsp" onsubmit="return checkForm();" method="post">
-                                <%
-                                   } else if (source.equals("Delete Book")) {
-                                %>
-                                       <!-- after clicking on the button DelServlet is shown -->
-                                       <form id="upd_del_book" name="upd_del_book" action="DelServlet" onsubmit="return checkForm();" method="post">
-                                <%
-                                   }
-                                %>
+                                <form id="upd_del_book" name="upd_del_book" action="upd_del_page.jsp" onsubmit="return checkForm();" method="post">
+                                
                                 
                                 <%           
                                     String input0 = ""; // read the value which was before in the input field prev_title and show it again
@@ -177,8 +158,8 @@
                                     <%
                                         if (source.equals("Delete Book")) {
                                     %>
-                                            <!-- adding the Delete button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
-                                            <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Delete</button>
+                                            <!-- adding the button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                            <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Submit</button>
                                     <%  } else {
                                     %>
                                             <!-- adding the Next button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
