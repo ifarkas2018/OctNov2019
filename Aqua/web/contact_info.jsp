@@ -59,7 +59,8 @@
                                 &nbsp; &nbsp;
                                 <br />
                                 <h3>Contact Us</h3>
-                                <br/> 
+                                <br/>
+                                <!-- information about the store - London -->
                                 <span class="text-info">
                                     <font size="+2">London</font>
                                 </span>
@@ -71,6 +72,7 @@
                                 </span>
                                 <br />
                                 <br />
+                                <!-- opening hours ( in a table ) -->
                                 <table class="table table-bordered table-sm">
                                     <thead>
                                         <tr class="table-active">
@@ -92,12 +94,13 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <!-- information about the store - Norwich -->
                                 <span class="text-info">
                                     <font size="+2">Norwich</font><br />
                                 </span>
                                 78 Main Street, London S2H 8LS <br />
+                                
                                 Email: 
-
                                 <span class="email">
                                     <a href="mailto:norwich@aquabooks.co.uk?subject=Feedback&body=Message">norwich@aquabooks.co.uk</a>
                                 </span>
@@ -105,6 +108,7 @@
                                 <br />
                                 <br />
                                 
+                                <!-- opening hours ( in a table ) -->
                                 <table class="table table-bordered table-sm">
                                     <thead >
                                         <tr class="table-active">

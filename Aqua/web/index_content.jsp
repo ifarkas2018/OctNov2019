@@ -48,20 +48,15 @@
                     display: none;
                 }
             }
-            
-                       
+                                   
         </style>
         <title>Aqua Books</title>
     </head>
-    <body>
-        <%
-            
-        %>    
+    
+    <body>    
         <%! String sTitle = "";
             String sAuthor = "";
             String sPrice = "";
-            // String sISBN = "";
-            // String sDescr = "";
             
             // retrieveBookInf: retrievs the title, author name, price of the book
             // when the user clicks on one of the links on the home page for the book with index index
@@ -81,8 +76,6 @@
                 sTitle = "";
                 sAuthor = "";
                 sPrice = "";
-                //sISBN = "";
-                //sDescr = "";
                 
                 try {
                     if (rs.next()) {
@@ -92,13 +85,9 @@
                         sAuthor = rs.getString("au_name");
                         // read the price
                         sPrice = rs.getString("price");
-                        // read the ISBN
-                        // sISBN = rs.getString("isbn");
-                        // show the value for the title, author and price
-                        // sDescr = rs.getString("descr");
                     }
                 } catch ( SQLException ex ) {
-
+                    System.out.println("An exception occured: " + ex.getMessage());
                 }
             }
         %>  
@@ -116,11 +105,6 @@
                 <div class="col-lg-6 col-md-6"> 
                     <div class="container"> <!-- adding the container to the Bootstrap grid -->
                         <br /><br />
-                        <!-- <div> -->  
-                            <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
-                            <!-- horizontally centering the picture using center-image, img-fluid is for responsive image -->
-                            <!-- <img src="images/books-yellow-book-reading.jpg" class="img-fluid center-image" alt="picture of books" title="picture of books"> -->
-                        <!-- </div> -->
                         <%
                             try {    
                                 // retrieve the book information and store it in result set rs
@@ -128,7 +112,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -138,6 +122,7 @@
                             </div>
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_1.jpg" class="img-fluid  float-left pull-left mr-2" onclick="createCookieIndex(1)" alt="picture of a book" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -177,7 +162,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -186,6 +171,7 @@
                             <div class="col-lg-1 col-md-1 col-sm-1 book_L">
                                 &nbsp;
                             </div>
+                            
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
@@ -203,6 +189,7 @@
                                 <% } %>
                             </div>
                         </div> 
+                            
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -227,7 +214,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -238,6 +225,7 @@
                             </div>
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_3.jpg" class="img-fluid  float-left pull-left mr-2" onclick="createCookieIndex(3)" alt="picture of a book" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -277,7 +265,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -303,6 +291,7 @@
                                 <% } %>
                             </div>
                         </div> 
+                            
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -327,7 +316,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -338,6 +327,7 @@
                             </div>
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_5.jpg" class="img-fluid  float-left pull-left mr-2" onclick="createCookieIndex(5)" alt="picture of a book" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -369,7 +359,6 @@
                             </div>
                         </div>
                         <br/>
-  
                     </div>
                 </div>
                 
@@ -385,7 +374,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -393,6 +382,7 @@
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_6.jpg" class="img-fluid  float-left pull-left mr-2" onclick="createCookieIndex(6)" alt="picture of a book" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -436,7 +426,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -444,6 +434,7 @@
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_7.jpg" class="img-fluid  float-left pull-left mr-2" alt="picture of a book" onclick="createCookieIndex(7)" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -487,7 +478,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -495,6 +486,7 @@
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_8.jpg" class="img-fluid  float-left pull-left mr-2" alt="picture of a book" onclick="createCookieIndex(8)" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -538,7 +530,7 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         
@@ -546,6 +538,7 @@
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_9.jpg" class="img-fluid  float-left pull-left mr-2" alt="picture of a book" onclick="createCookieIndex(9)" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -589,13 +582,14 @@
                                 // assign title, author name, price, isbn and description to the variables
                                 bookInformation(rs);
                             } catch(SQLException e) {
-
+                                System.out.println("An exception occured: " + e.getMessage());
                             }
                         %>
                         &nbsp;
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col-lg-11 col-md-11 col-sm-11">
                                 <!-- @@@@@@@@@@@ DO IT -- change the TITLE and ALT ( in the img tag ) to the title of the book -->
+                                
                                 <!-- pull-left mr-2 is used for spacing between the image and the text -->
                                 <a href="ShowBook"><img src="images/book_10.jpg" class="img-fluid  float-left pull-left mr-2" alt="picture of a book" onclick="createCookieIndex(10)" title="picture of a book"></a>
                                 <% if (!sAuthor.equalsIgnoreCase("")) { %>
@@ -631,7 +625,6 @@
                             </div>
                         </div>
                         <br/>
-                        
                         
                         <br/>
                         <br /> 

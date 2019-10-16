@@ -53,7 +53,7 @@ public class UserDAO {
                 try {
                     rs.close(); // closing the RecordSet object
                 } catch (Exception e) {
-                
+                    e.printStackTrace();
                 }
                 rs = null;
             }
@@ -62,7 +62,7 @@ public class UserDAO {
                 try {
                     stmt.close(); // closing the Statement object
                 } catch (Exception e) {
-                
+                    
                 }
                 stmt = null;
             }

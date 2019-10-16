@@ -14,6 +14,7 @@
 <!-- update_page.jsp - when the user clicks on the Next button on the page upd_del_title.jsp -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,6 +22,7 @@
         <!-- link to the external style sheet -->
         <link href="css/templatecss.css" rel="stylesheet" type="text/css">
     </head>
+
     <body>
         <%
             String fillIn = "false"; // whether some of the session variables have values of the fields in the form update_form.jsp
@@ -54,6 +56,7 @@
                     prev_title = AquaMethods.deleteSpaces(prev_title);
                     prev_auth = AquaMethods.deleteSpaces(prev_auth);
                     prev_isbn = AquaMethods.deleteSpaces(prev_isbn);
+                    
                     // addBacksl replaces every occurence of \ with \\\\ and replaces every occurence of ' with \\'
                     prev_title = AquaMethods.addBacksl(prev_title);
                     prev_auth = AquaMethods.addBacksl(prev_auth);

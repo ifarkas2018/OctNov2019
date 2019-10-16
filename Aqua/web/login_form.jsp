@@ -13,7 +13,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <script src="myScript.js"></script>
+        <!-- @@@@@@@@@@@@@ -->
+        <!-- <script src="myScript.js"></script> -->
         
         <script>
             NUM_FIELDS = 3; // number of the input fields on the form  
@@ -38,6 +39,7 @@
     
     <title>Aqua Books - Login</title>
     <body onload="setDefaults()">
+        
         <%
             final String PAGE_NAME = "login_page.jsp"; // page which is loaded now
             HttpSession hSession = AquaMethods.returnSession(request);
@@ -48,6 +50,7 @@
             // to show the previous values 
             hSession.setAttribute("subscribe", "false");
         %>
+        
         <!-- adding a new row to the Bootstrap grid; class whitebckgr is for setting the background to white -->
         <div class="whitebckgr">
             <div class="row"> <!-- adding a new row to the Bootstrap grid -->

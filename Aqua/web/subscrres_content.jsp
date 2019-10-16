@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@page import="miscellaneous.AquaMethods"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,6 +25,7 @@
             }
         </script>
     </head>
+    
     <body onload="setFillIn()">
         <!-- adding a new row to the Bootstrap grid; class whitebckgr is for setting the background to white -->
         <div class="whitebckgr">

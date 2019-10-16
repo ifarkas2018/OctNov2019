@@ -65,7 +65,7 @@ public class AddDAO {
         
         try {
             String rs_query=""; 
-            boolean empty_field = false; // is the inpu field empty
+            boolean empty_field = false; // is the input field empty
 
             // table author
             // First I check whether in the table AUTHOR record with the entered AUTHOR's NAME exists 
@@ -249,5 +249,4 @@ public class AddDAO {
         }
         return returnStr;
     }
-   
 }

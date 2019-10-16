@@ -15,13 +15,11 @@
         <!-- link to the external style sheet -->
         <link href="css/templatecss.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
-       
+
+    <body>       
         <!-- header.jsp contains - company logo, company name and the navigation bar -->
         <%@ include file="header.jsp"%>
-        
         <%@ include file="search_form.jsp"%> 
-       
         <!-- footer.jsp contains the footer of the web page --> 
         <%@ include file="footer.jsp"%> 
     </body>

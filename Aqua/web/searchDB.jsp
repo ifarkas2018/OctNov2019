@@ -1,5 +1,5 @@
 <%-- 
-    Document   : searchDB
+    Document   : searchDB.jsp
     Created on : 18-Sep-2018, 00:54:05
     Author     : Ingrid Farkas
     called from search_form.jsp
@@ -23,6 +23,7 @@
         <title>Aqua Books - Search Book</title>
         <%@ include file="header.jsp"%>
     </head>
+    
     <body>
         <div class="whitebckgr">
             <div class="row"> <!-- adding a new row to the Bootstrap grid -->
@@ -40,6 +41,7 @@
                                 &nbsp; &nbsp;
                                 <br/>
                                 <h3>Search</h3><br/>
+                                
                                 <%!
                                     // cont_wildcard returns true if the string contains one of wildcards % or _. Otherwise it returns false.
                                     boolean cont_wildcard(String str) {
@@ -52,6 +54,7 @@
                                             return false;
                                     }
                                 %>
+                                
                                 <%
                                     boolean subscr = false; // whether the user is coming from the subscribe
                                     HttpSession hSession = AquaMethods.returnSession(request);
@@ -157,10 +160,10 @@
                                         // if the user chose for the the price range <5 GBP
                                         if (form_price.equalsIgnoreCase("less5"))
                                             tempStr = "< 5"; 
-                                            // if the user chose for the the price range between 5GBP and 10GBP
+                                        // if the user chose for the the price range between 5GBP and 10GBP
                                         else if (form_price.equalsIgnoreCase("betw5-10"))
                                             tempStr = "BETWEEN 5 AND 10";
-                                            // if the user chose for the the price range between 10GBP and 20GBP
+                                        // if the user chose for the the price range between 10GBP and 20GBP
                                         else if (form_price.equalsIgnoreCase("betw10-20"))
                                             tempStr = "BETWEEN 10 AND 20";
                                         // if the user chose for the the price range between 20GBP and 30GBP

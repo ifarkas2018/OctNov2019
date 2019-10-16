@@ -1,5 +1,5 @@
 <%-- 
-    Document   : search_form
+    Document   : search_form.jsp
     Created on : 18-Sep-2018, 01:33:11
     Author     : Ingrid Farkas
 --%>

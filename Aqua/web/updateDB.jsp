@@ -13,14 +13,15 @@
 <%@page import="connection.ConnectionManager"%>
         
 <%@page import="java.sql.PreparedStatement"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/templatecss.css" type="text/css" rel="stylesheet"/>
         <title>Aqua Books - Update Book</title>
+        
         <%@ include file="header.jsp"%>
     </head>
     
@@ -258,8 +259,10 @@
                 hSession.setAttribute("title", sTitle);
                 response.sendRedirect("error_succ.jsp"); // redirects the response to error_succ.jsp  
         %>
+        
         <br>
         <br>
+        
         <%
             out.print(" ");
         %>

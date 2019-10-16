@@ -44,7 +44,7 @@
             <div class="footer" align="center" id="footer">
                 <div class="container"> 
                     <div class="row"> 
-                        <!-- the Bootstrap column takes 2 columns on the large screen, 6 columns on the medium sized screens,
+                        <!-- the Bootstrap column takes 2 columns on the large screen, 2 columns on the medium sized screens,
                              4 columns on the small sized screens, 6 columns on the extra small screens -->
                         <div  class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                             &nbsp; &nbsp; <!-- adding some empty space -->

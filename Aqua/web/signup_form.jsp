@@ -12,8 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <script src="JavaScript/ValidationJS.js"></script> 
         
         <script>
@@ -104,6 +103,7 @@
             // to show the previous values 
             hSession.setAttribute("subscribe", "false");
         %>
+        
         <!-- adding a new row to the Bootstrap grid; class whitebckgr is for setting the background to white -->
         <div class="whitebckgr">
             <div class="row"> <!-- adding a new row to the Bootstrap grid -->

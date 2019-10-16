@@ -2,7 +2,7 @@
     Document   : home_1_book
     Created on : 21-Sep-2019, 20:48:11
     Author     : Ingrid Farkas
-    called when the user clicks on the first book on the Home page
+    called when the user clicks on one of the books on the Home page
 --%>
 <%@page import="java.sql.Connection"%>
 <%@page import="connection.ConnectionManager"%>
@@ -24,6 +24,7 @@
             }  
         </script>
     </head>
+    
     <body onload="deleteCookie()">
         <%! 
             // retrieveBookDescr: retrievs the title, author name, price, isbn, description of the book
@@ -97,6 +98,7 @@
                                             // show the value for the title, author and price
                                             String descr = rs.getString("descr");
                                             out.print("<li><b>" + sTitle + "</b> by (author) " + sAuthor ); 
+                                            
                                             // if there is value for the price : show it
                                             if (sPrice != null && !sPrice.equalsIgnoreCase("")){
                                                 out.print(" (<b>price: </b>" + sPrice + " GBP)" + "<br/>");

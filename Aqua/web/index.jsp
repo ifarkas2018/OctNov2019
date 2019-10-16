@@ -7,6 +7,7 @@
 <!-- author: Ingrid Farkas -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="miscellaneous.AquaMethods"%>
+
 <!DOCTYPE html>
 <html>
     <head>

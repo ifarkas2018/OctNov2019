@@ -15,18 +15,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <script src="JavaScript/ValidationJS.js"></script>
+        
         <style>
-
-            /* input field, text area, select : setting the color, background colour when DISABLED */
             
             input:disabled, textarea:disabled, select:disabled {
                 background-color: white !important;
             }
            
         </style>
+        
         <script>
             
             NUM_FIELDS = 11; // maximum number of the input fields on this and the previous forms             
@@ -55,8 +54,7 @@
         </script>
         
         <%
-            HttpSession hSession2 = AquaMethods.returnSession(request);
-            
+            HttpSession hSession2 = AquaMethods.returnSession(request);    
             String source = (String)hSession2.getAttribute("source_name"); // on which page I am now
         %>
         
@@ -67,10 +65,7 @@
         <%
             final String PAGE_NAME = "upd_del_page.jsp"; // page which is shown now 
         %>
-        <%  
-            // HttpSession hSession2 = AquaMethods.returnSession(request);
-            
-                                            
+        <%                                  
             String input3 = ""; // read the value which was before in the input field title to show it again
             String input4 = "";
             String input5 = "";
@@ -267,10 +262,10 @@
                                 <%
                                     } else if (source.equals("Delete Book")) {
                                 %>
-                                    <!-- after clicking on the button DelServlet is shown -->
-                                    <form id="upd_del_book" name="upd_del_book" action="DelServlet" onsubmit="return checkForm();" method="post">
+                                     <!-- after clicking on the button DelServlet is shown -->
+                                     <form id="upd_del_book" name="upd_del_book" action="DelServlet" onsubmit="return checkForm();" method="post">
                                 <%
-                                   }
+                                    }
                                 %>
                                 
                                     <!-- creating the input element for the title -->
@@ -283,22 +278,20 @@
                                                 <input type="text" class="form-control form-control-sm" name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= input3 %>"> <!-- title input field -->
                                                 <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-
                                                 <input type="text" class="form-control form-control-sm" name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= title %>"> <!-- title input field -->
                                             <% } 
                                             %>
                                         <%
                                            } else if (source.equals("Delete Book")) {
                                         %>
-                                                <!-- if the user just did the subscribe show the value from the form before the subscribe -->
-                                                <% if (!input3.equalsIgnoreCase("")) { %>
-                                                    <input type="text" class="form-control form-control-sm" disabled name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= input3 %>"> <!-- title input field -->
-                                                    <!-- otherwise read the record from the DB and show it -->
-                                                <% } else { %>
-
-                                                    <input type="text" class="form-control form-control-sm" disabled name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= title %>"> <!-- title input field -->
-                                                <% } 
-                                                %>
+                                            <!-- if the user just did the subscribe show the value from the form before the subscribe -->
+                                            <% if (!input3.equalsIgnoreCase("")) { %>
+                                                <input type="text" class="form-control form-control-sm" disabled name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= input3 %>"> <!-- title input field -->
+                                                <!-- otherwise read the record from the DB and show it -->
+                                            <% } else { %>
+                                                <input type="text" class="form-control form-control-sm" disabled name="title" id="title" maxlength="60" onchange="setCookie()" value="<%= title %>"> <!-- title input field -->
+                                            <% } 
+                                            %>
                                         <%
                                            }
                                         %>
@@ -505,7 +498,6 @@
                                                         <option value="child">Children's</option>  
                                                     <% } %>
                                                 </select>
-
                                             <% } %>
                                         <%
                                            } else if (source.equals("Delete Book")) {

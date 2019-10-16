@@ -1,5 +1,5 @@
 <%-- 
-    Document   : login_inf_info
+    Document   : login_inf_info.jsp
     Created on : 06-Oct-2019, 20:16:17
     Author     : user
 --%>
@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
+    
     <body>
         <%
             HttpSession hSession = AquaMethods.returnSession( request );
@@ -20,6 +21,7 @@
             // to show the previous values 
             hSession.setAttribute("subscribe", "false"); 
         %>
+        
         <!-- adding a new row to the Bootstrap grid; class whitebckgr is for setting the background to white -->
         <div class="whitebckgr">
             <div class="row"> <!-- adding a new row to the Bootstrap grid -->
@@ -46,6 +48,7 @@
                                 <form id="login_inf" name="login_inf" action="login_page.jsp" method="post">
                                     Please use the following information to log in:
                                     <br/> 
+                                    <!-- showing administrator's username and password -->
                                     <span class="text-info">
                                         <font size="+2">Administrator</font>
                                     </span>
@@ -55,6 +58,7 @@
                                         <li>password: admin</li>    
                                     </ul>
 
+                                    <!-- showing employee's username and password -->
                                     <span class="text-info">
                                         <font size="+2">Employee</font>
                                     </span>

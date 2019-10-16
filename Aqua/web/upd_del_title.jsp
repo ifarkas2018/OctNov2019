@@ -44,8 +44,7 @@
         </script>
         
         <%
-            HttpSession hSession2 = AquaMethods.returnSession(request);
-            
+            HttpSession hSession2 = AquaMethods.returnSession(request);            
             String source = (String)hSession2.getAttribute("source_name"); // on which page I am now
         %>
         
@@ -91,8 +90,6 @@
                                 <br />
                                 
                                 <form id="upd_del_book" name="upd_del_book" action="upd_del_page.jsp" onsubmit="return checkForm();" method="post">
-                                
-                                
                                 <%           
                                     String input0 = ""; // read the value which was before in the input field prev_title and show it again
                                     String input1 = ""; // read the value  in the input field prev_author and show it again

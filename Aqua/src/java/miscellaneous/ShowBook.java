@@ -58,7 +58,6 @@ public class ShowBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession hSession2 = AquaMethods.returnSession(request);
@@ -87,7 +86,6 @@ public class ShowBook extends HttpServlet {
             
             response.sendRedirect("home_book.jsp"); // redirects the response to the jsp page
         }
-        
     }
 
     /**

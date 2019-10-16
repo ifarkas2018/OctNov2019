@@ -14,6 +14,7 @@
         <!-- link to the external style sheet -->
         <link href="css/templatecss.css" rel="stylesheet" type="text/css">
     </head>
+
     <body>
         <% 
             HttpSession hSession = AquaMethods.returnSession(request);

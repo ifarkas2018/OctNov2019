@@ -18,10 +18,8 @@
     <body>
        
         <!-- header.jsp contains - company logo, company name and the navigation bar -->
-        <%@ include file="header.jsp"%>
-        
+        <%@ include file="header.jsp"%>        
         <%@ include file="signup_form.jsp"%> 
-        
         <!-- footer.jsp contains the footer of the web page --> 
         <%@ include file="footer.jsp"%> 
     </body>

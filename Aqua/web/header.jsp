@@ -190,8 +190,7 @@
                                     <a class="nav-link" href="AddSessVar" onclick="cookieFillIn('contact_page.jsp')">Contact</a>
                                 </li>
                             </ul>
-                                
-                            
+                                                            
                             <!-- ml-auto : this part of the links on the navabar is on the RIGHT hand side -->
                             <ul class="navbar-nav ml-auto">
                                 <%

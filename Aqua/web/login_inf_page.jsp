@@ -1,5 +1,5 @@
 <%-- 
-    Document   : login_info_page
+    Document   : login_inf_page.jsp
     Created on : 06-Oct-2019, 20:10:55
     Author     : user
 --%>
@@ -14,6 +14,7 @@
         <!-- link to the external style sheet -->
         <link href="css/templatecss.css" rel="stylesheet" type="text/css">
     </head>
+    
     <body>
         <!-- including the file header.jsp into this file -->
         <!-- header.jsp contains - company logo, company name and the navigation bar -->
