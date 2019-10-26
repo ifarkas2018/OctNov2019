@@ -1,9 +1,8 @@
-<!--  author : Ingrid Farkas, project : Time Management -->
+<!--  author : Ingrid Farkas, project : Time Manager, 2020 -->
 <div class="content">
-	<!-- begining of the footer section -->
-    <!-- <div class="w3-row w3-container"> --> 
-    	<!-- Footer -->
-<div class="color_footer"> <!-- w3-container w3-padding-32  -->  
+  <!-- begining of the footer section --> 
+  <!-- footer -->
+  <div class="color_footer">   
     <div class="w3-row-padding">
       <div class="w3-third">
         <h3>INFO</h3>
@@ -22,17 +21,15 @@
       <div class="w3-third">
         <h3>POPULAR TAGS</h3>
         <p>
-          <span class="w3-tag w3-black w3-margin-bottom">Time Management</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Scheduling</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Employee Schedules</span>
+          <span class="w3-tag w3-black w3-margin-bottom">Time Manager</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Scheduling</span>
+          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Employee Schedules</span>
           <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Task List</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Add Task</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Update Task</span>
           <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Delete Task</span> 
         </p>
       </div>
     </div>
-</div> 
-        <!-- <br />
-        <br /> -->
-	<!-- </div> --> <!-- end of class="w3-row w3-container" -->
-    <!-- end of the footer section -->
+  </div> 
+  <!-- end of the footer section -->
 </div> <!-- end of class="content" --> 
 </body>
 </html>

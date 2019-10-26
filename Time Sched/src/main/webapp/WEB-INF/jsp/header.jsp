@@ -1,4 +1,4 @@
-<!-- author: Ingrid Farkas; project: Time Management -->
+<!-- author: Ingrid Farkas; project: Time Manager, 2020 -->
 <!-- meta elements -->
 <!-- character set used on the web page -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -21,4 +21,4 @@
 <!-- modal.css - stylesheet with CSS rules for the modal box used in show_schedule.jsp -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/modal.css"/>
 
-<title>Time Management</title> 
+<title>Time Manager</title> 

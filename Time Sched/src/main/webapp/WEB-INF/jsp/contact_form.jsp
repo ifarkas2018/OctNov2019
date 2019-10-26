@@ -1,12 +1,10 @@
-<!-- author: Ingrid Farkas; project: Time Management -->
+<!-- author: Ingrid Farkas; project: Time Manager, 2020 -->
 <!-- contact_form is shown when the URL is contact_us -->
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<!-- the link to the external style sheet -->	  
 	<%@ include file="header.jsp"%>
 	
 	<style type="text/css">
@@ -16,13 +14,9 @@
 	</style>
 	
 	<script>
-		
-		FNAME_VAL = 'true'; // does the first name input field contain only letters ( and spaces and apostrophes )
-		LNAME_VAL = 'true'; // does the last name input field contain only letters ( and spaces and apostrophes )
+		FNAME_VAL = 'true'; // does the first name input field contain only letters (and spaces and apostrophes)
+		LNAME_VAL = 'true'; // does the last name input field contain only letters (and spaces and apostrophes)
 		EMAIL_VAL = 'true'; // is the entered value a valid email address
-		// PASSW_EQUAL = 'true'; // do the passwords in 2 input fields match 
-		//EMPID_VAL = 'true'; // is the entered Employee ID a number 
-		//DATE_VAL = 'true'; // has the entered date a date format
 		
 		// setNAME_VAL: if is_fname is 'true' sets the FNAME_VAL to val, otherwise sets the LNAME_VAL to val 
 		function setNAME_VAL(is_fname, val) {
@@ -33,20 +27,17 @@
 		    }
 		}
 		
-		// valLetters: checks whether in the control input_field there are only letters ( and spaces and apostrophes ). If it isn't in the message_span the message is shown.
+		// valLetters: checks whether in the control input_field there are only letters (and spaces and apostrophes). If it isn't in the message_span the message is shown.
 		// required - if the input field was required to be filled in before showing the message, when the user corrects the mistake, bellow
-		// is shown again that the input field is required ( to be filled in )
-		function valLetters( input_field, message_span,required, is_fname) { 
+		// is shown again that the input field is required (to be filled in)
+		function valLetters(input_field, message_span,required, is_fname) { 
 		    var regex = /^[a-zA-Z\x27\x20]+$/;
-		    //alert("valLetters");
 		    
 		    if (!input_field.value == '') {
-		        if ( !regex.test(input_field.value)) { // if the user entered some characters which are not letters ( in the input_field )
+		        if ( !regex.test(input_field.value)) { // if the user entered some characters which are not letters (in the input_field)
 		            message_span.innerHTML = "* Can Contain only Letters, Apostrophes and Space";
 		            setNAME_VAL(is_fname, 'false');
-		            // set the focus in the input field where the user entered characters other than letters
-		            // input_field.focus();
-		        } else { // the user entered characters which are letters ( in the input_field )
+		        } else { // the user entered characters which are letters (in the input_field)
 		        	setNAME_VAL(is_fname, 'true');
 		            if (required == 'true') {
 		                message_span.innerHTML = "* Required Field";
@@ -77,7 +68,6 @@
             		message_span.innerHTML = "";
             		EMAIL_VAL = 'true';
             	}
-            	
         	} else {
         		message_span.innerHTML = "";
         		EMAIL_VAL = 'true';
@@ -92,20 +82,21 @@
 		        return false;
 		    }
 		}
-</script>
+		
+	</script>
 </head>
 
 <body>   
     <div class="content"> 
    		<!-- Top menu -->
       	<header class="w3-container w3-white w3-xlarge w3-padding-16"> 
-        	<span class="w3-left">Time Management</span> 
+        	<span class="w3-left">Time Manager</span> 
       	</header> <!-- end of header -->
       	
       	<!-- including the navigation -->
       	<%@ include file="nav1.jsp"%>
       	
-      	<!-- including the content ( of the web page ) -->
+      	<!-- including the content (of the web page) -->
       	<%@ include file="contact_info.jsp"%> <!-- shows the contact information and the form for entering the name, email, message -->
       	<br />
       	

@@ -1,10 +1,13 @@
+/* project : Time Manager, author : Ingrid Farkas, 2020 */ 
+/* author: Ingrid Farkas */
+
 /* the modal box (background) */
 .modal {
   display: none; /* hidden by default */
   position: fixed; /* stay in place */
   align : center;
   z-index: 1; /* be on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 100px; /* location of the box */
   left: 0; 
   top: 0;
   width: 100%; /* full width */

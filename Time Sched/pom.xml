@@ -27,7 +27,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
@@ -42,7 +41,6 @@
     		<groupId>org.apache.tomcat.embed</groupId>
     		<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
- 
 		<dependency>
     		<groupId>javax.servlet</groupId>
     		<artifactId>jstl</artifactId>
