@@ -139,9 +139,6 @@
 		  <!-- w3-dropdown-content is used to create responsive dropdown links -->
 		  <!-- w3-theme-m1 is a CSS rule from the colors.css ( sets the color of the text and the background color ) -->
 		  <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-theme-m1" style="width:8%;">
-		    <!-- w3-text-theme-m1  is a CSS rule from the colors.css ( sets the color of the text to the blue ) -->
-		    <!-- w3-hover-text-orange is used to set the orange color of the text when the user hovers the mouse over the link --> 
-		    <a href="task_list" class="w3-bar-item w3-button w3-text-theme-m1 w3-hover-text-orange w3-hover-none w3-mobile">Task List</a> 
 		    <%
 		      if (is_admin) { // the user is logged in an admin
 		    %>

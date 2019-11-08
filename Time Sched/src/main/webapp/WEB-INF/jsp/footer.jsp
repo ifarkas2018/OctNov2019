@@ -13,9 +13,11 @@
         <h3>COMPANY</h3>
         <span><i class="fa fa-fw fa-map-marker"></i> H &amp; C Web Consulting</span>
         <br />
-        <span><i class="fa fa-fw fa-phone"></i> 0044123123</span>
+        <span><i class="fa fa-fw fa-phone"></i> (925) 380.4794</span>
         <br />
-        <span><i class="fa fa-fw fa-envelope"></i> hcweb@mail.com</span>
+        <span  class="email">
+          <i class="fa fa-fw fa-envelope"></i> Email: <a href="mailto:info@hcweb.com?subject=Feedback&body=Message" style="text-decoration:none !important;">info@hcweb.com</a>
+        </span>
       </div>
 
       <div class="w3-third">

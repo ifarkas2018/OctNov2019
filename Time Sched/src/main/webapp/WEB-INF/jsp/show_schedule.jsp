@@ -32,20 +32,23 @@
 	  <div class="w3-twothird w3-container"> 
 	    <br/>
 	    <br/>
-	    <!--  w3-light-grey sets the background colour of the container -->
-	    <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="show_sched_info"> 
+	    <!-- form_background sets the background colour of the container -->
+	    <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	      <div class="w3-content w3-text" style="max-width:600px">
-	        <h4 class="w3-center"><b>Show Schedule</b></h4> 
-	 		<h6>Employee Name: ${enter_f_name} ${enter_l_name}</h6> <!-- showing the employee name -->
-	 		<h6>Date of the Schedule: ${enter_date}</h6> <!-- showing the date of the schedule -->
+	        <h3 class="w3-center"><b>Show Schedule</b></h3>
+	        <br />
+	        <br /> 
+	 		Employee Name: ${enter_f_name} ${enter_l_name} <!-- showing the employee name -->
+	 		<br />
+	 		Date of the Schedule: ${enter_date} <!-- showing the date of the schedule -->
 	 					
-			<form action="http://localhost:8080/home" method="post"> <!-- when submitted the localhost:8080/home is shown -->
-			  <!-- otherwise localhost:8080 is shown -->
+			<form action="http://localhost:8080/show_sched" method="get"> 
 	 		  <div>
-				<br/>
-				<br/>
+				<br />
+				<br />
+				
 				<!-- creating the table with the tasks -->
-				<table class="w3-table w3-bordered w3-centered" id="table">
+				<table class="w3-table w3-centered" id="table">
 				  <!-- creating the table row with the headings -->
 				  <tr>
 				    <th>Task Id</th>
@@ -66,15 +69,19 @@
 		   		</table>		
 		    	<br />
 		    	<br />
-				<!-- w3-camo-grey is a CSS rule in the styles.css -->
-				<button class="w3-btn w3-center w3-tiny w3-padding-small w3-camo-grey" id="theBtn">Back To Home</button> 
+		    	<div class="w3-container w3-center">
+  				  <!-- add the button to the page -->
+  				  <button class="w3-btn w3-tiny w3-padding-small w3-camo-grey">Show Schedule</button> 
+				</div>
 	    	  </div>
 	    	</form>
+	    	
 		  </div> <!-- end of the class="w3-content w3-text" -->
 		</div> <!-- end of the class="w3-container w3-light-grey w3-padding-32 w3-padding-large" -->
 		<br />	 		
+		<br />
 	  </div> <!-- end of the class=""w3-twothird w3-container" -->	
 	</div> <!-- end of the class=w3-row w3-margin" -->
-  </div> <!-- end of the contact section -->
- </div> <!-- end of class="w3-content" -->
+  </div>
+ </div> 
 </body> 

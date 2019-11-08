@@ -16,14 +16,15 @@
     <div class="w3-twothird w3-container">
       <br />
       <br />
+      <!-- form_background sets the background colour of the container -->
       <div class="w3-container form_background w3-padding-32 w3-padding-large" id="time_mng">
         <div class="w3-content" style="max-width:600px">
-	      <h4 class="w3-center"><b>Time Manager</b></h4>
+	      <h3 class="w3-center"><b>Time Manager</b></h3>
 	      <br/>
 	      <ul>
 	        <li>
 	          <span>
-	            use it for <b>scheduling tasks, meetings and events</b> ( whenever and wherever you need them )
+	            use it for <b>scheduling tasks, meetings and events</b> (whenever and wherever you need them)
 	          </span>
 	        </li> 
 	        <li>
@@ -37,7 +38,7 @@
 	      <ul>
 	        <li>
 	          <span>
-	            add, update and delete entered tasks ( meetings or events )
+	            add, update and delete entered tasks (meetings or events)
 	          </span>
 	        </li>
 	        <li>
@@ -47,7 +48,7 @@
 	        </li>
 	        <li>
 	          <span>
-	            add employee and show employee ( administrator )
+	            add employee and show employee (administrator)
 	          </span>
 	        </li>
 	      </ul>
@@ -57,5 +58,5 @@
       <br />
     </div> <!-- end of class="w3-twothird w3-container" -->
    </div> <!-- end of class="w3-row w3-margin" --> 
-  </div> <!-- end of the contact section -->
-</div> <!-- end of class="content" -->
+  </div> 
+</div> 

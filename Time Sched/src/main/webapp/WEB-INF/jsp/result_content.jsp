@@ -27,12 +27,13 @@
 	<div class="w3-twothird w3-container">
 	  <br/>
 	  <br/>
-	  <!-- w3-text-theme-m1 CSS rule which sets the color of the text (file styles.css) -->
-	  <div class="w3-container  w3-light-grey w3-padding-32 w3-padding-large" id="show_sched_info"> 
+	  <!-- form_background CSS rule which sets the color of the background (file styles.css) -->
+	  <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	    <div class="w3-content w3-text" style="max-width:600px">
 	      <!-- w3-center centers the text -->
 	      <!-- page_title : the title of the page (an attribute added to the model in MainController.java) -->
-		  <h4 class="w3-center"><b>${page_title}</b></h4>
+		  <h3 class="w3-center"><b>${page_title}</b></h3>
+		  <br />
 		  <br />
 		  <br />
 		  <br />
@@ -43,12 +44,12 @@
     		// if the text is not supposed to be red - don't show it in red
 		    if(text_red.equals("false")) {
   		  %>			
-      	  <h5 class="w3-center"><b>${message_shown}</b></h5>
+      	      <h6 class="w3-center"><b>${message_shown}</b></h6>
       	  <%
       		// if the text is to be in red
 			}  else {
 		  %>
-			  <h5 class="w3-center w3-text-red"><b>${message_shown}</b></h5>
+			  <h6 class="w3-center w3-text-red"><b>${message_shown}</b></h6>
 		  <%
 			}
     					
@@ -57,31 +58,30 @@
 			// if the user is logged in , after clicking on the button, localhost:8080/home is shown
 			if (already_log.equals("true")) { 
 		  %>
-			  <form action="http://localhost:8080/home" method="post"> <!-- when submitted the localhost:8080/home is shown -->
+			   <form action="http://localhost:8080/home" method="post"> <!-- when submitted the localhost:8080/home is shown -->
 			<!-- otherwise localhost:8080 is shown -->
 			<% } else { %>
 			   <form action="http://localhost:8080" method="post"> <!-- when submitted the localhost:8080 is shown -->
 			<% }
 			%>
-	  		    <!-- hidden input field containing logged_in -->
-	  		    <input class="w3-input w3-border" type="hidden" name="loggedin" value="${logged_in}"> 
-	  		    <br/>
-			    <div class="w3-container w3-center">
-			      <!-- add the button to the page -->
-			      <button class="w3-btn w3-center w3-tiny w3-padding-small w3-camo-grey">Home</button> 
-			    </div>
-			    <br />
-			    <br />
-			    <br />
-			    <br />
-			    <br />
-			    <br />
-			    <br />
-		      </form>
+	  		   <!-- hidden input field containing logged_in -->
+	  		   <input class="w3-input w3-border" type="hidden" name="loggedin" value="${logged_in}"> 
+	  		   <br/>
+	  		   <br />
+			   <br />
+			   <br />
+			   <br />
+			   <div class="w3-container w3-center">
+			     <!-- add the button to the page -->
+			     <button class="w3-btn w3-center w3-tiny w3-padding-small w3-camo-grey">Home</button> 
+			   </div>
+			   <br />
+		     </form>
 	    </div>
 	  </div>
+	  <br /> 
 	  <br />
 	</div>  <!-- end of class="w3-twothird w3-container" -->
    </div> <!-- end of class="w3-row w3-margin" --> 
-  </div> <!-- end of the contact section -->
-</div> <!-- end of class="content" -->
+  </div> 
+</div>

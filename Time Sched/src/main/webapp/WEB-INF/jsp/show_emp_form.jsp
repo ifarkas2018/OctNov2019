@@ -9,6 +9,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  
 </head>
 
 <body>
@@ -34,15 +35,17 @@
 	  <div class="w3-twothird w3-container"> 
 	    <br/>
 	    <br/>
-	    <!--  w3-light-grey sets the background colour of the container -->
-	    <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="show_sched_info"> 
+	    <!-- form_background CSS rule which sets the color of the container (file styles1.css) -->
+	    <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	      <div class="w3-content w3-text" style="max-width:600px">
-	        <h4 class="w3-center"><b>Show Employee</b></h4> 
-	 					
+	        <h3 class="w3-center"><b>Show Employee</b></h3> 
+	 		<br />
+	 		<br />			
+	 		<br />
 			<form action="http://localhost:8080/show_sched" method="post"> <!-- when submitted the localhost:8080/home is shown -->		
 			  <div>
 				<!-- creating the table with the employees -->
-				<table class="w3-table w3-bordered w3-centered" id="table">
+				<table class="w3-table w3-centered" id="table">
 			      <!-- creating the table row with the headings -->
 				  <tr>
 					<th>Employee ID</th>
@@ -69,16 +72,21 @@
 			   		</tr>
 		       	  </c:forEach> 
 		   		</table>
-		    				
+		   		<br />
+		        <br />		
 		    	<br />
 		    	<br />
-				<!-- w3-camo-grey is a CSS rule in the styles.css -->
-				<button class="w3-btn w3-center w3-tiny w3-padding-small w3-camo-grey" id="theBtn">Show Schedule</button> 
+		    	<br />
+		    	<div class="w3-container w3-center">
+  				  <!-- add the button to the page -->
+  				  <button class="w3-btn w3-tiny w3-padding-small w3-camo-grey">Show Schedule</button> 
+				</div>
 	    	  </div>
 	    	</form>
 		  </div> <!-- end of the class="w3-content w3-text" -->
 		</div> <!-- end of the class="w3-container w3-light-grey w3-padding-32 w3-padding-large" -->
-	    <br />			
+	    <br />	
+	    <br />		
 	  </div> <!-- end of the class=""w3-twothird w3-container" -->	
 	 </div> <!-- end of the class=w3-row w3-margin" -->
    </div> 

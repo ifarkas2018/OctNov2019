@@ -24,7 +24,7 @@
 		if (date.indexOf("//") < 0) {
 		  var arr = date.split("/"); // split the date using the character /
 	
-		  if ( arr[0].length !=2 || arr[1].length !=2 || arr[2].length !=4 ){ // if the user didn't enter 2 digits for the day, month or 4 digits for the year 
+		  if (arr[0].length < 1 || arr[0].length > 2 || arr[1].length < 1 || arr[1].length > 2 || arr[2].length !=4){ // if the user didn't enter 1 or 2 digits for the day, month or 4 digits for the year 
 			DATE_VAL = 'false';
 			document.getElementById(msg_field).innerHTML = "* Please Enter The Date In The Required Format";
 		  } else if ((isNaN(arr[0])) || (isNaN(arr[1])) || (isNaN(arr[2]))) { // if the day, month or year is not a number

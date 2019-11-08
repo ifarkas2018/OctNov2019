@@ -27,17 +27,19 @@
 	  <div class="w3-twothird w3-container">
 	    <br/>
 	    <br/>
-	    <!--  w3-text-theme-m1 CSS rule which sets the color of the text (file styles1.css) -->
-	    <div class="w3-container  w3-light-grey w3-padding-32 w3-padding-large" id="show_sched_info"> 
+	    <!-- form_background CSS rule which sets the color of the container (file styles1.css) -->
+	    <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	      <div class="w3-content w3-text" style="max-width:600px">
 	        <% if (is_add_emp.equals("true")) { // it is Add Employee
 	        %>
 		    <!-- w3-center centers the text -->
-			<h4 class="w3-center"><b>Add Employee</b></h4>
+			<h3 class="w3-center"><b>Add Employee</b></h3>
 			<% } else if (is_show_emp.equals("true")) { %>
 			  <!-- w3-center centers the text -->
-			  <h4 class="w3-center"><b>Show Employee</b></h4>
+			  <h3 class="w3-center"><b>Show Employee</b></h3>
 			<% } %>
+			<br />
+			<br />
 			
 			<%
 			  if (is_show_emp.equals("true")) { // it is Show Employee
@@ -97,13 +99,17 @@
 						  <option value="Support">Support</option>
 						</select> 
 					  </div> 
-				  	  <button class="w3-btn w3-camo-grey" onclick="return checkForm();">Next</button> 
+					  <br />
+					  <!-- the w3-third class uses 33% of the parent container -->
+				  	  <button class="w3-btn w3-camo-grey w3-third" onclick="return checkForm();">Next</button> 
 				  <%
 				    } else if (is_show_emp.equals("true")) { // it is Show Employee
 				  %>
 				  	  <!-- hidden input field with the string show ( it is Show Employee ) -->
-					  <input class="w3-input w3-border" type="hidden" name="show_add" value="show"> 	            
-				      <button class="w3-btn w3-camo-grey" onclick="return checkForm();">Show Employee</button> 
+					  <input class="w3-input w3-border" type="hidden" name="show_add" value="show"> 	  
+					  <br />          
+					  <!-- the w3-third class uses 33% of the parent container -->
+				      <button class="w3-btn w3-camo-grey w3-third" onclick="return checkForm();">Show Employee</button> 
 				  <%
 				    }
 				  %>
@@ -111,7 +117,8 @@
 	         </div>
 	      </div>
 	      <br />
+	      <br />
 	    </div>  <!-- end of class="w3-twothird w3-container" -->
 	</div> <!-- end of class="w3-row w3-margin" --> 
-  </div> <!-- end of the contact section -->
-</div> <!-- end of class="content" -->
+  </div> 
+</div> 

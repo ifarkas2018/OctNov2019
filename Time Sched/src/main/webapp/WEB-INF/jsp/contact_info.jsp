@@ -20,7 +20,7 @@
 	<div class="w3-twothird w3-container">
 	  <br/>
 	  <br/>
-	  <!-- w3-text-theme-m1 CSS rule which sets the color of the text (file styles1.css) -->
+	  <!-- form_background CSS rule which sets the color of the container (file styles1.css) -->
 	  <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	    <div class="w3-content w3-text" style="max-width:600px">
 	      <!-- w3-center centers the text -->
@@ -28,8 +28,11 @@
 		  <br />
 		  <br />
 		  <i class="fa fa-map-marker" style="width:30px"></i> New York, USA</span><br>
-    	  <i class="fa fa-phone" style="width:30px"></i> Phone: (646) 380.4794<br>
-    	  <i class="fa fa-envelope" style="width:30px"></i> Email: info@hcweb.com<br>
+    	  <i class="fa fa-phone" style="width:30px"></i> Phone: (925) 380.4794<br>
+    	  <span class="email">
+   		  	<i class="fa fa-envelope" style="width:30px"></i> Email: <a href="mailto:info@hcweb.com?subject=Feedback&body=Message" style="text-decoration:none !important;">info@hcweb.com</a>
+		  </span>
+    	  <br />
     	  <br />
 		  <%  
 			// did the user already login (as administrator or employee)
@@ -68,6 +71,7 @@
 				  <span id="req_mssg" class="red_text">* Required Field</span>
 				</div> 
 				<br />
+				<!-- the w3-third class uses 33% of the parent container -->
     			<button type="submit" class="w3-btn w3-camo-grey w3-third" onclick="return checkForm();">Send a Message</button>
     			<br />
     		  </form>

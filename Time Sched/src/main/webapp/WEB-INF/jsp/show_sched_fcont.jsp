@@ -21,8 +21,8 @@
 	<div class="w3-twothird w3-container">
 	  <br/>
 	  <br/>
-	  <!--  w3-text-theme-m1 CSS rule which sets the color of the text ( file styles1.css ) -->
-	  <div class="w3-container  w3-light-grey w3-padding-32 w3-padding-large" id="show_sched_info"> 
+	  <!-- form_background CSS rule which sets the color of the container (file styles1.css) -->
+	  <div class="w3-container form_background w3-padding-32 w3-padding-large" id="show_sched_info"> 
 	    <div class="w3-content w3-text" style="max-width:600px">
 	              		
 		  <% 
@@ -36,28 +36,28 @@
 		    // is_del_task : to delete task
 		    String is_del_task = (String)(request.getAttribute("is_del_task"));
 		             	
-		    // setting the session variable "sess_del_task" ( whether the user is doing delete of the task )
+		    // setting the session variable "sess_del_task" (whether the user is doing delete of the task)
 		    session.setAttribute("sess_del_task", is_del_task);
-		    // setting the session variable "is_update" ( whether the user is doing update of the schedule )
+		    // setting the session variable "is_update" (whether the user is doing update of the schedule)
 		    session.setAttribute("sess_update", is_update);
 		                
 	   	    if (is_update.equals("true")){ // if Update Schedule
 		  %>
 			      
 	          <!--  w3-center centers the text -->
-			  <h4 class="w3-center"><b>Update Schedule</b></h4> <!-- title of the web page -->
+			  <h3 class="w3-center"><b>Update Schedule</b></h3> <!-- title of the web page -->
 		  <% 
 		    } else if (is_show_sched.equals("true")){ // if Show Schedule
 		  %>
-			  <h4 class="w3-center"><b>Show Schedule</b></h4> <!-- title of the web page -->
+			  <h3 class="w3-center"><b>Show Schedule</b></h3> <!-- title of the web page -->
 		  <% 	
 		    } else if (is_add_task.equals("true")){ // if Add Task
 		  %>
-		      <h4 class="w3-center"><b>Add Task</b></h4> <!-- title of the web page -->
+		      <h3 class="w3-center"><b>Add Task</b></h3> <!-- title of the web page -->
 	      <% 	
 		    } else if (is_del_task.equals("true")){ // if Delete Task
 	      %>
-			  <h4 class="w3-center"><b>Delete Task</b></h4> <!-- title of the web page -->
+			  <h3 class="w3-center"><b>Delete Task</b></h3> <!-- title of the web page -->
 		  <%
 		    }           
     		String sess_admin = (String)session.getAttribute("sess_adm"); // did the user before log in as admin (and is still logged in)
@@ -69,13 +69,29 @@
     		if ((is_add_task.equals("true")) || (is_del_task.equals("true"))) { // if Add or Delete Task
           %>
               <form action="/add_d_form" name="add_d_form" id="add_d_form" method="post"> <!-- shows the URL : localhost:8080/add_d_form -->
-    				
+    	    <%
+    	      if (is_add_task.equals("true")) { // if it is Add Task
+    	    %>	    
+    		    <input class="w3-input w3-border" type="hidden" name="delete_task" id="delete_task" value ="false" required=true>	
+    	    <%
+    	      } else { // if it is Delete Task
+    	    %>
+    	        <input class="w3-input w3-border" type="hidden" name="delete_task" id="delete_task" value ="true" required=true>
+    	    <%
+    	      }
+    	    %>
     	  <% 
     		} else { // if Show Schedule or Update Schedule
           %>
     		  <form action="/sched_table" name="show_sched" id="show_sched" method="post"> <!-- shows the URL : localhost:8080/sched_table -->
 		  <%
     		}
+    	  %>
+    	  
+    	  <br />
+    	  <br />
+    	  
+    	  <%	
 		    // if the user is logged in as admin, or as an ordinary user who is not doing the update (but show of the schedule)
 		    if ((is_adm) || (is_update).equals("false")){ %> 
 			  <div class="w3-section">
@@ -116,18 +132,34 @@
 		    if ((!(is_add_task.equals("true"))) && (!(is_del_task.equals("true")))){ // if it isn't Add Task or Delete Task
 		  %>
 			  <div class="w3-section">
-			    <label>Date(format dd/mm/yyyy) </label>
+			    <label>Date (format dd/mm/yyyy) </label>
 			    <input class="w3-input w3-border" type="text" name="date" id="date" maxlength="10" onchange='dateFormat("date", "date_message");' required=true>
 			    <span id="date_message" class="red_text">* Required Field</span>
 			  </div> 
-		  <%
+		  <% 
 		    }
-		  %>  
+		  %>
+		  
+		  	  <br />
+		  
+		  <% 
+		  	if (is_show_sched.equals("true") || is_update.equals("true")) {
+		  %>  	
 		        <!-- w3-camo-grey is a CSS rule in the colors.css -->
-		        <button class="w3-btn w3-camo-grey" onclick="return checkForm();">Submit</button> 
+		        <button class="w3-btn w3-camo-grey w3-third" onclick="return checkForm();">Show Schedule</button> 
+		  <%
+		  	} else {
+		  %>
+		  		<!-- w3-camo-grey is a CSS rule in the colors.css -->
+		        <button class="w3-btn w3-camo-grey w3-third" onclick="return checkForm();">Next</button> 
+		  <%	
+		  	}
+		  %>    
+		      <br />
 		      </form>
 	    </div>
 	  </div>
+	  <br />
 	  <br />
 	</div>  <!-- end of class="w3-twothird w3-container" -->
    </div> <!-- end of class="w3-row w3-margin" --> 

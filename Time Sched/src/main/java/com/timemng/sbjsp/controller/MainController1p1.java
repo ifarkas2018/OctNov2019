@@ -372,6 +372,7 @@ public class MainController1p1 {
         		}
         		if (lst != null && !lst.isEmpty()) {
         			// adding to the model the attribute lstEmployee which is a list of employee ID, first name, last name and department
+        			int lstsize = lst.size();
         			model.addAttribute("lstEmployee", lst);
         			return "show_emp_info";
         		} else { // in the database there is no first name and last name for the user logged in 
@@ -448,6 +449,7 @@ public class MainController1p1 {
     	empID = "";
     	fName = first_name; // setting the variable fName to the value entered on the form
     	lName = last_name; // setting the variable lName to the value entered on the form
+    	enter_date = TimeMngLibrary.correctDate(enter_date); // change the enter_tdate to be in the format dd/mm/yyyy 
     	
     	// if fName, lName contains ' add one more next to it ( otherwise an error will occur when running the SQL query )  
     	if (fName != null && !fName.equals(""))
@@ -493,14 +495,14 @@ public class MainController1p1 {
 			List<EmpSchedTaskInfo1p1> list = empSchedTaskDAO.getSchedules();
 			// there are no tasks returned for the certain employee on the certain day
 			if (list == null || list.isEmpty()) {
-				model.addAttribute("page_title", "Schedule");
+				model.addAttribute("page_title", "Show Schedule");
 				if (empID != null)
 					if (!empID.equals(""))
-						model.addAttribute("message_shown", "The schedule for employee with employee ID " + empID + " named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
+						model.addAttribute("message_shown", "The schedule for the employee with employee ID " + empID + " named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
 					else
-						model.addAttribute("message_shown", "The schedule for employee named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
+						model.addAttribute("message_shown", "The schedule for the employee named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
 				else
-					model.addAttribute("message_shown", "The schedule for employee named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
+					model.addAttribute("message_shown", "The schedule for the employee named "+ first_name + " " + last_name + " on " + enter_date + " doesn't exist!");
 				// the message should be in red (adding it to the model)
 				model.addAttribute("is_red", "true");
 				// set here some model attributes if needed
@@ -518,7 +520,7 @@ public class MainController1p1 {
 				return "show_sched_results"; // show the show_sched_results.jsp
 			}
 		} else { // in the database there is no first name and last name for the user logged in
-        	model.addAttribute("page_title", "Schedule"); // adding the page_title variable to the model
+        	model.addAttribute("page_title", "Show Schedule"); // adding the page_title variable to the model
         	model.addAttribute("message_shown", "For your login the first and the second name is not entered!"); // adding the message to the model
         	model.addAttribute("is_red", "true"); // the message should be in red ( adding it to the model )
         	model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
@@ -549,6 +551,8 @@ public class MainController1p1 {
         @RequestParam(value="end_time", required=true) String enter_etime) {
   
     	boolean update_succ = true;
+    	enter_tdate = TimeMngLibrary.correctDate(enter_tdate); // change the enter_tdate to be in the format dd/mm/yyyy 
+
     	try {
     		// update of the task in the DB
     		empSchedTaskDAO.updateTask(Long.valueOf(id), enter_tname, enter_tdate, enter_stime, enter_etime);
@@ -559,11 +563,11 @@ public class MainController1p1 {
     	// setting the model attributes (I can access them from .jsp)
     	model.addAttribute("page_title", "Update Task"); // adding the page_title variable to the model
     	if (update_succ) {
-    		model.addAttribute("message_shown", "The task was updated successfully !");
+    		model.addAttribute("message_shown", "The task was updated successfully!");
     		model.addAttribute("is_red", "false"); // adding to the model : the text needs to be shown in red
     	}
     	else {
-    		model.addAttribute("message_shown", "The task wasn't updated successfully - an error occurred while updating the task !");
+    		model.addAttribute("message_shown", "The task wasn't updated successfully - an error occurred while updating the task!");
     		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
     	}
     	model.addAttribute("logged_in", "false"); // the user is now not logging in 
@@ -606,7 +610,7 @@ public class MainController1p1 {
     // used in show_sched_fcont.jsp
      @RequestMapping(value = {"add_d_form"}, method = RequestMethod.POST)
      public String add_d_form(Model model, @RequestParam(value="first_name", required=false) String fName, // 
-    	@RequestParam(value="last_name", required=false) String lName) {
+    	@RequestParam(value="last_name", required=false) String lName, @RequestParam(value="delete_task", required=true) String del_task ) {
     	
     	List<EmpIDInfo1p1> lst = new ArrayList<>(); // list of objects (employee ID)
     	// boolean name_entered = false; // did the user enter the employee ID, first name, last name (if the admin is logged in)
@@ -635,6 +639,12 @@ public class MainController1p1 {
     	if ((lst != null && !lst.isEmpty())) { // the employee with the first and last name is found 
     		empID = lst.get(0).getEmployeeID(); // retrieving the employee ID
     	} else {
+    		if (del_task.equals("true")) { // it is a Delete Task
+	    		// setting the model attributes (I can access them from .jsp)
+		    	model.addAttribute("page_title", "Delete Task"); // adding the page_title variable to the model
+			} else { // it is Add Task
+				model.addAttribute("page_title", "Add Task"); 
+			}
 			model.addAttribute("message_shown", "The employee doesn't exist in the database. Please first add the employee " + first_name + " " + last_name + " to the database!");
     		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
     		model.addAttribute("logged_in", "false"); // the user is now not logging in 
@@ -710,6 +720,12 @@ public class MainController1p1 {
     		if (lst != null && !lst.isEmpty()) { // if the sched_id for the given employee ID is found
     			schedID = lst.get(0).getScheduleID(); // retrieving the schedule ID
     		} else {
+    			if (del_task.equals("true")) { // it is a Delete Task
+    	    		// setting the model attributes (I can access them from .jsp)
+    		    	model.addAttribute("page_title", "Delete Task"); // adding the page_title variable to the model
+    			} else { // it is Add Task
+    				model.addAttribute("page_title", "Add Task"); 
+    			}
     			model.addAttribute("message_shown", "The employee doesn't exist in the database. Please first add the employee to the database!");
 	    		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
 	    		model.addAttribute("logged_in", "false"); // the user is now not logging in 
@@ -717,8 +733,10 @@ public class MainController1p1 {
 	        	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
 	        	return "result";
     		}
+    		
+    		enter_stime = TimeMngLibrary.correctTime(enter_stime); // change the enter_stime to be in the format hh:mm AM/PM
+    		enter_tdate = TimeMngLibrary.correctDate(enter_tdate); // change the enter_tdate to be in the format dd/mm/yyyy 
     		if (del_task.equals("false")) { // it isn't Delete but Add Task
-    			enter_stime = TimeMngLibrary.correctTime(enter_stime); // change the enter_stime to be in the format hh:mm AM/PM
     			enter_etime = TimeMngLibrary.correctTime(enter_etime); // change the enter_etime to be in the format hh:mm AM/PM
 	    		// adds to the SQL query the schedule ID, task name, task date, start time, end time depending on the data the user entered in the Add Task form
 	    		empSchedTaskDAO.addToQueryStr2(schedID, enter_tname, enter_tdate, enter_stime, enter_etime);
@@ -739,31 +757,32 @@ public class MainController1p1 {
     		 add_succ = false;
     		 del_query = false;
     	}
+    	
     	if (del_task.equals("true")) { // it is a Delete Task
     		// setting the model attributes (I can access them from .jsp)
 	    	model.addAttribute("page_title", "Delete Task"); // adding the page_title variable to the model
 	    	if (del_query) {
 	    		if (numRows > 0) { // one or more rows were deleted
-		    		model.addAttribute("message_shown", "The task was deleted successfully !");
+		    		model.addAttribute("message_shown", "The task was deleted successfully!");
 		    		model.addAttribute("is_red", "false"); // adding to the model : the text dosn't need to be shown in red
 	    		} else {
-	    			model.addAttribute("message_shown", "The task doesn't exist in the database - the task wasn't deleted successfully !");
+	    			model.addAttribute("message_shown", "The task doesn't exist in the database - the task wasn't deleted successfully!");
 		    		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
 	    		}
 	    	}
 	    	else {
-	    		model.addAttribute("message_shown", "The task wasn't deleted successfully - an error occurred while deleting the task !");
+	    		model.addAttribute("message_shown", "The task wasn't deleted successfully - an error occurred while deleting the task!");
 	    		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
 	    	}
     	} else { // it is an Add Task
 	    	// setting the model attributes (I can access them from .jsp)
 	    	model.addAttribute("page_title", "Add Task"); // adding the page_title variable to the model
 	    	if (add_succ) {
-	    		model.addAttribute("message_shown", "The task was added successfully !");
+	    		model.addAttribute("message_shown", "The task was added successfully!");
 	    		model.addAttribute("is_red", "false"); // adding to the model : the text doesn't need to be shown in red
 	    	}
 	    	else {
-	    		model.addAttribute("message_shown", "The task wasn't added successfully - an error occurred while adding the task !");
+	    		model.addAttribute("message_shown", "The task wasn't added successfully - an error occurred while adding the task!");
 	    		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
 	    	}
     	}
@@ -899,13 +918,13 @@ public class MainController1p1 {
 		    }
 		    // adding the email and the message was successful
 		    if ((numRowsUpd>0) && (numRowsMssg>0)) {
-			    model.addAttribute("page_title", "Thank You"); // the title of the page ( adding to the model )
+			    model.addAttribute("page_title", "Contact Us"); // the title of the page ( adding to the model )
 				model.addAttribute("message_shown", "The message was successfully sent!"); // adding the message to the model
 	        	model.addAttribute("is_red", "false"); // the message should be in red ( adding  it to the model )
 	        	model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
 	        	return "result";
 		    } else { // a problem occurred while adding the email and the message
-		    	model.addAttribute("page_title", "Thank You"); // the title of the page (adding to the model)
+		    	model.addAttribute("page_title", "Contact Us"); // the title of the page (adding to the model)
 		    	model.addAttribute("message_shown", "A problem occured while accessing the database!"); // adding the message to the model
 	        	model.addAttribute("is_red", "true"); // the message should be in red ( adding  it to the model )
 	        	model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
@@ -1015,7 +1034,7 @@ public class MainController1p1 {
 		    }
 		    // adding the email and the message was successful
 		    if ((numRowsUpd>0) && (numRowsMssg>0)) {
-			    model.addAttribute("page_title", "Thank You"); // the title of the page (adding to the model)
+			    model.addAttribute("page_title", "Contact Us"); // the title of the page (adding to the model)
 				model.addAttribute("message_shown", "The message was successfully sent!"); // adding the message to the model
 	        	model.addAttribute("is_red", "false"); // the message should be in red (adding  it to the model)
 	        	model.addAttribute("logged_in", "false"); // setting the attribute logged_in to false - the user is not logged in
