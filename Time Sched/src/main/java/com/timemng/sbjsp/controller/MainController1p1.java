@@ -32,10 +32,10 @@ import com.timemng.sbjsp.other.TimeMngLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController1p1 {
@@ -66,12 +66,6 @@ public class MainController1p1 {
 	 private MessageDAO1p1 messageDAO;
 	 @Autowired
 	 private MsgCustDAO1p1 msgcustDAO;
-	
-	 private String loginID; // the logged in user's ID
-	 private String empID; // the employee's ID
-	 private String fName; // the employee's first name
-	 private String lName; // the employee's last name
-	 private String department; // department 
 	    
 	// if the requested URL is localhost:8080, method is GET do 
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
@@ -93,18 +87,16 @@ public class MainController1p1 {
         return "index";
     }
     
-    
     // if the requested URL is localhost:8080/home, method is GET do
     // used if the user before logged in 
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String indhome(Model model) {
     	model.addAttribute("logged_in", "false"); // the user is not logged in
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
         return "index"; 
     }
     
- 
     // if the requested URL is localhost:8080/home, method is POST do
     // used if the user before logged in 
     @RequestMapping(value = {"home"}, method = RequestMethod.POST)
@@ -112,20 +104,28 @@ public class MainController1p1 {
     	model.addAttribute("is_admin", "false"); // the user is not logged in as admin
     	model.addAttribute("logged_in", "false"); // the user is not logged in
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
         return "index"; 
     }
-    
     
     // if the requested URL is localhost:8080/add_login, method is POST do
     // used if the administrator is adding a new login (addshw_fcont.jsp)
     @RequestMapping(value = {"add_login"}, method = RequestMethod.POST)
-    public String add_login(Model model, @RequestParam(value="first_name", required=false) String first_name, // 
+    public String add_login(Model model, HttpServletRequest request, @RequestParam(value="first_name", required=false) String first_name, // 
     	@RequestParam(value="last_name", required=false) String last_name, @RequestParam(value="department", required=false) String department) {
+    	
+    	String fName = ""; // the employee's first name
+    	String lName = ""; // the employee's last name
+    	String dep = ""; // department 
     	
     	fName = first_name;
     	lName = last_name;
-    	this.department = department;
+    	dep = department;
+    	
+    	request.getSession().setAttribute("fName", fName);
+    	request.getSession().setAttribute("lName", lName);
+    	request.getSession().setAttribute("department", department);
+    	
     	// adding the attributes to the model
         model.addAttribute("logged_in","true"); // the user didn't log in
     	model.addAttribute("is_admin","true"); // the user logged in as admin
@@ -143,7 +143,7 @@ public class MainController1p1 {
         model.addAttribute("logged_in","false"); // the user didn't log in
     	model.addAttribute("is_admin","false"); // the user didn't log in as admin 
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "false"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "false"); // did the user log in before (and is still logged in)
     	model.addAttribute("logging_in", "true"); // the user is trying to log in
     	model.addAttribute("add_login", "false"); // the administrator is not adding a new login
     	return "loginfo"; // return the logform.jsp
@@ -156,21 +156,27 @@ public class MainController1p1 {
         model.addAttribute("logged_in","false"); // the user didn't log in
     	model.addAttribute("is_admin","false"); // the user didn't log in as admin 
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "false"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "false"); // did the user log in before (and is still logged in)
     	model.addAttribute("logging_in", "true"); // the user is trying to log in
     	model.addAttribute("add_login", "false"); // the administrator is not adding a new login
     	return "logform"; // return the logform.jsp
     }
     
-    // if the requested URL is localhost:8080/login_result, method is POST ( from logfcont.jsp )
+    // if the requested URL is localhost:8080/login_result, method is POST (from logfcont.jsp)
     @RequestMapping(value = "login_result", method = RequestMethod.POST) 
     // user_name is an input element in logfcont.jsp. The user entered the user_name, user_passw 
-	public String login_result2(Model model, @RequestParam(value="user_name", required=true) String user_name, // 
+	public String login_result2(Model model, HttpServletRequest request, @RequestParam(value="user_name", required=true) String user_name, // 
 		@RequestParam(value="user_passw", required=true) String user_passw) {
+    	
+    	String loginID = ""; // the logged in user's ID
+    	String empID = ""; // the logged in employee ID
+    	String fName = ""; // the first name of the logging in user
+    	String lName = ""; // the last name of the logging in user
+    	
     	try { 
         	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
     		model.addAttribute("logged_in","true"); // setting the default value for whether the user logged in
-    		model.addAttribute("already_login", "false"); // did the user log in before ( and is still logged in )
+    		model.addAttribute("already_login", "false"); // did the user log in before (and is still logged in)
  
     		String usernm_noapostr = user_name; // user name with no ' 
     		user_name = TimeMngLibrary.addApostrophe(user_name);
@@ -187,6 +193,7 @@ public class MainController1p1 {
     				    model.addAttribute("is_admin", "true"); // the user logged in as admin
     				    LoginInfo1p1 log_info = list.get(0); // retrieving the object of type LoginInfo1p1 which contains the employee ID
     				    loginID = log_info.getEmployeeID(); // retrieving the employee ID
+    				    request.getSession().setAttribute("loginID", loginID); // storing the login ID (of the user that is loggin in) in the session attribute
     				    return "index"; 
     				}
     				else { 
@@ -211,7 +218,7 @@ public class MainController1p1 {
     			}
 			} else if (empLoginDAO.addToQueryStr(user_name, user_passw)) { // the user is logging in as regular user
 					// add the rest of the query to the query
-		    		// addToQueryStr returns FALSE - if the user didn't enter user name or password ( in the form ) 
+		    		// addToQueryStr returns FALSE - if the user didn't enter user name or password (in the form) 
 					// list is a list of objects of type LoginInfo (user name, password) that match the entered values of user name and password
 					List<LoginInfo1p1> list = empLoginDAO.getLogin();
 					// is in the database a user name and the password which was entered in the form
@@ -220,9 +227,13 @@ public class MainController1p1 {
 						model.addAttribute("is_admin", "false"); // the user is not logged in as admin
 						LoginInfo1p1 log_info = list.get(0); // retrieving the object of type LoginInfo1p1 which has the employee ID
 						loginID = log_info.getEmployeeID(); // retrieving the employee ID
+						request.getSession().setAttribute("loginID", loginID); // storing the login ID (of the user that is loggin in) in the session attribute
 						empID = loginID; // reset the ID of the logged in employee 
-						fName = "";
+						request.getSession().setAttribute("empID", empID);
+						fName = ""; 
+						request.getSession().setAttribute("fName", fName);
 						lName = "";
+						request.getSession().setAttribute("lName", lName);
 						return "index"; 
 					} else { // the user with that user name and password doesn't exist
 						model.addAttribute("page_title", "Log In");
@@ -258,7 +269,7 @@ public class MainController1p1 {
     	model.addAttribute("logged_in", "true"); // the user is logged in
     	model.addAttribute("is_admin", "true"); // the user is logged in as admin
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
     	model.addAttribute("is_add_emp","true"); // it is an Add Employee not Show Employee
     	model.addAttribute("is_show_emp","false"); // it isn't a Show Employee but Add Employee
     	return "addshw_form";
@@ -267,7 +278,7 @@ public class MainController1p1 {
     // if the requested URL is localhost:8080/showempl_form, method is GET do 
     @RequestMapping(value = {"showempl_form"}, method = RequestMethod.GET)
     public String showempl_form(Model model) { 
-    	// setting the model attributes ( I can access them from .jsp )
+    	// setting the model attributes (I can access them from .jsp)
     	model.addAttribute("logged_in", "true"); // the user is not logged in
     	model.addAttribute("is_admin", "true"); // the user is logged in as admin
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
@@ -281,11 +292,18 @@ public class MainController1p1 {
     @RequestMapping(value = "addshow_emp", method = RequestMethod.POST)
     // first_name, last_name is an input element in addshw_fcont.jsp
     // the user entered the first name, last name of the new employee to be added to the database
-	public String addshow_emp(Model model, @RequestParam(value="first_name", required=false) String f_Name, //
-		@RequestParam(value="last_name", required=false) String l_Name, @RequestParam(value="user_name", required=false) String userName, //
-		@RequestParam(value="user_passw", required=false) String password, @RequestParam(value="show_add", required=false) String show_add) {
+	public String addshow_emp(Model model, HttpServletRequest request, 
+		@RequestParam(value="user_name", required=false) String userName, @RequestParam(value="first_name", required=false) String f_Name, //
+		@RequestParam(value="last_name", required=false) String l_Name, @RequestParam(value="user_passw", required=false) String password, // 
+		@RequestParam(value="show_add", required=false) String show_add) {
 	
-    	String emp_id = ""; // employee ID
+    	String empID = ""; // the employee's ID
+    	String fName = ""; // the employee's first name (before adding apostrophies)
+    	String lName = ""; // the employee's last name (before adding apostrophies)
+    	String fName_apostr = ""; // the employee's first name (after adding apostrophies)
+    	String lName_apostr = ""; // the employee's last name (after adding apostrophies)
+
+    	String department = ""; // department 
     	int numRows = -1; // how many rows were affected by the SQL statement
     	List<EmpIDNameInfo1p1> lst = new ArrayList<>(); // list of elements of type EmpIDNameInfo1p1
     	List<EmpIDInfo1p1> lstEmp = new ArrayList<>(); // list of elements of type EmpEmailInfo1p1
@@ -296,30 +314,38 @@ public class MainController1p1 {
         	model.addAttribute("is_admin", "true"); // the user is logged in as admin
         	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false 
         	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
-        	if ((f_Name!=null) && (!f_Name.equals(""))) 
+        	fName = (String)request.getSession().getAttribute("fName");
+        	lName = (String)request.getSession().getAttribute("lName");
+        	
+        	if ((f_Name!=null) && (!f_Name.equals(""))) // if the user entered on the form the first name
         		fName = f_Name;
-        	else
-        		f_Name = fName; 
+        	else {
+        		// f_Name = fName;
+        		fName =  (String)request.getSession().getAttribute("fName"); // read the first name from the session attribute
+        	}
         	if ((l_Name!=null) && (!l_Name.equals("")))
         		lName = l_Name;
-        	else
-        		l_Name = lName; 
-        	fName = TimeMngLibrary.addApostrophe(fName);
-        	lName = TimeMngLibrary.addApostrophe(lName);
+        	else {
+        		// l_Name = lName; 
+        		lName =  (String)request.getSession().getAttribute("lName"); // read the last name from the session attribute
+        	}
+          	fName_apostr = TimeMngLibrary.addApostrophe(fName);
+        	lName_apostr = TimeMngLibrary.addApostrophe(lName);
         	if (show_add.equals("add")) { // it is Add Employee
         		userName = TimeMngLibrary.addApostrophe(userName);
             	password = TimeMngLibrary.addApostrophe(password);
+            	department = (String)request.getSession().getAttribute("department");
         		// ADDING the NEW EMPLOYEE to the employee table
         		// add the rest of the query to the query - method returns FALSE - if the user didn't enter first name or last name (in the form)  
-        		if (empDeptDAO.addToQueryStr(fName, lName, department)) {
-        			numRows = empDeptDAO.addEmployee(fName, lName, department); // addEmployee returns a positive value if the employee was added to the database
+        		if (empDeptDAO.addToQueryStr(fName_apostr, lName_apostr, department)) {
+        			numRows = empDeptDAO.addEmployee(fName_apostr, lName_apostr, department); // addEmployee returns a positive value if the employee was added to the database
         			// addEmployee returns a positive value if the employee was added to the database
     				if (numRows > 0) {
     					// determine the empID 
-    		    		// add to the SQL query the WHERE clause - where (first_name = fName of the employee) and (last_name = lName of the employee)
-    		    		empIDDAO.addToQueryStrID(fName, lName);
-    		    		// list is a list of objects of type EmpNameInfo (employee ID, first name, last name) where (first_name = fName) and (last_name = lName) 
-    		    		lstEmp = empIDDAO.getEmployeeID(fName, lName); // getting the name of the employee with employee ID = loginID	
+    		    		// add to the SQL query the WHERE clause - where (first_name = fName_apostr of the employee) and (last_name = lName_apostr of the employee)
+    		    		empIDDAO.addToQueryStrID(fName_apostr, lName_apostr);
+    		    		// list is a list of objects of type EmpNameInfo (employee ID, first name, last name) where (first_name = fName_apostr) and (last_name = lName_apostr) 
+    		    		lstEmp = empIDDAO.getEmployeeID(fName_apostr, lName_apostr); // getting the name of the employee with employee ID = loginID	
     		    		if (lstEmp != null && !lstEmp.isEmpty()) { // retrieve the employee ID
     		    		    empID = lstEmp.get(0).getEmployeeID(); // retrieving the employee ID
     		    		}
@@ -339,7 +365,7 @@ public class MainController1p1 {
 	    					model.addAttribute("page_title", "Add Employee"); // adding the page_title variable to the model
 	    					// setting the attribute logged_in to true - the user is logged in
 	    					model.addAttribute("logged_in", "true");
-	    					model.addAttribute("message_shown", "The employee with the name " + f_Name + " " + l_Name + " was successfully added to the database!");
+	    					model.addAttribute("message_shown", "The employee with the name " + fName + " " + lName + " was successfully added to the database!");
 	    					// the message shouldn't be in red (adding it to the model)
 	    					model.addAttribute("is_red", "false");
 	    					model.addAttribute("numRows", numRows);
@@ -366,8 +392,8 @@ public class MainController1p1 {
     				return "result"; // show the result.jsp 
         		}
         	} else { // it is Show Employee
-        		empID = emp_id;  
-        		if (empIDnameDAO.addToQueryStr(empID, fName, lName)) {
+        		empID = "";  
+        		if (empIDnameDAO.addToQueryStr(empID, fName_apostr, lName_apostr)) {
         			lst = empIDnameDAO.getEmployee(); // getEmployee returns a positive value if the employee was read from the database
         		}
         		if (lst != null && !lst.isEmpty()) {
@@ -379,8 +405,8 @@ public class MainController1p1 {
         			String message ="";
         			message += "The user with the "; // message shown on the "result.jsp" web page
         			if (!(empID.equals("")))
-        				message += "employee id: " + empID + " and the ";
-        			message += "name: " + f_Name + " " + l_Name + " doesn't exist in the database!"; 
+        				message += "employee id " + empID + " and the ";
+        			message += "name " + fName + " " + lName + " doesn't exist in the database!"; 
                 	model.addAttribute("page_title", "Show Employee"); // adding the page_title variable to the model
                 	model.addAttribute("message_shown", message); // adding the message to the model
                 	model.addAttribute("is_red", "true"); // the message should be in red ( adding it to the model )
@@ -424,8 +450,8 @@ public class MainController1p1 {
     	// setting the model attributes (I can access them from .jsp)
     	model.addAttribute("logged_in", "false"); // the user is not logging in 
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false 
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
-    	// is_update has to be set whether it is update ( or show schedule )
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
+    	// is_update has to be set whether it is update (or show schedule)
     	model.addAttribute("is_update","true"); // it is update schedule
     	model.addAttribute("is_show_sched","false"); // is it show schedule
     	model.addAttribute("is_add_task","false"); // is it add task
@@ -435,9 +461,13 @@ public class MainController1p1 {
     
     // if the requested URL is localhost:8080/sched_table, method is POST
     @RequestMapping(value = "sched_table", method = RequestMethod.POST)
-	public String sched_table(Model model, @RequestParam(value="first_name", required=false) String first_name, // 
+	public String sched_table(Model model, HttpServletRequest request, @RequestParam(value="first_name", required=false) String first_name, // 
     	@RequestParam(value="last_name", required=false) String last_name, @RequestParam(value="date", required=true) String enter_date) {
     	
+    	String empID = ""; // the employee's ID
+    	String loginID = ""; // the logged in user's ID
+    	String fName = ""; // the employee's first name
+    	String lName = ""; // the employee's last name
        	List<PersonInfo1p1> lst = new ArrayList<>(); // list of objects (first name, last name)
        	List<EmpIDInfo1p1> lstEmp = new ArrayList<>(); // list of objects (emp ID)
     	boolean name_entered = false; // did the user enter the employee ID, first name, last name (if the admin is logged in)
@@ -451,19 +481,20 @@ public class MainController1p1 {
     	lName = last_name; // setting the variable lName to the value entered on the form
     	enter_date = TimeMngLibrary.correctDate(enter_date); // change the enter_tdate to be in the format dd/mm/yyyy 
     	
-    	// if fName, lName contains ' add one more next to it ( otherwise an error will occur when running the SQL query )  
+    	// if fName, lName contains ' add one more next to it (otherwise an error will occur when running the SQL query)  
     	if (fName != null && !fName.equals(""))
     		fName = TimeMngLibrary.addApostrophe(fName);
     	if (lName != null && !lName.equals(""))
     		lName = TimeMngLibrary.addApostrophe(lName);
     	if ((empID==null || empID.equals("")) && (fName==null || fName.equals("")) && (lName==null || fName.equals(""))) { // if it is a regular user (who is doing update and not show of the schedule, retrieve the name 
-	    	// add to the SQL query the WHERE clause - where emp_id = loginID of the user logged in 
+    		loginID = (String)request.getSession().getAttribute("loginID");
+    		// add to the SQL query the WHERE clause - where emp_id = loginID of the user logged in 
 	    	personDAO.addToQueryStrName(loginID);
 			// list is a list of objects of type EmpNameInfo (employee ID, first name, last name) where employee ID is the ID of logged in user
 			lst = personDAO.getName(); // getting the name of the employee with employee ID = loginID
-    	} else { // the user is logged in as admin ( and he entered the name )
+    	} else { // the user is logged in as admin (and he entered the name)
     		name_entered = true; 
-    		//	determine the empID
+    		// determine the empID
     		if (empID.equals("")) {
     			// add to the SQL query the WHERE clause - where (firstName = first name of the employee) and (lastName = last name of the employee)
     			empIDDAO.addToQueryStrID(fName, lName);
@@ -486,8 +517,9 @@ public class MainController1p1 {
     	    		lName = TimeMngLibrary.addApostrophe(lName);
     			if (name_entered) // if the user is logged as an admin and he entered the first and last name then read the employee ID
     				empID = lstEmp.get(0).getEmployeeID(); // retrieving the employee ID
-    			else
+    			else {
     				empID = loginID; // if the user is logged in as a regular user, he can see ONLY HIS OWN records
+    			}
     		}
     		// add the rest of the query to the query
 			empSchedTaskDAO.addToQueryStr(empID, fName, lName, enter_date);
@@ -565,8 +597,7 @@ public class MainController1p1 {
     	if (update_succ) {
     		model.addAttribute("message_shown", "The task was updated successfully!");
     		model.addAttribute("is_red", "false"); // adding to the model : the text needs to be shown in red
-    	}
-    	else {
+    	} else {
     		model.addAttribute("message_shown", "The task wasn't updated successfully - an error occurred while updating the task!");
     		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
     	}
@@ -598,7 +629,7 @@ public class MainController1p1 {
     	// setting the model attributes (I can access them from .jsp)
     	model.addAttribute("logged_in", "false"); // the user is not logging in 
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false 
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
     	model.addAttribute("is_update","false"); // is it update schedule
     	model.addAttribute("is_show_sched","false"); // is it show schedule
     	model.addAttribute("is_add_task","false"); // is it add task
@@ -609,27 +640,25 @@ public class MainController1p1 {
     // if the requested URL is localhost:8080/add_d_form, method is POST do
     // used in show_sched_fcont.jsp
      @RequestMapping(value = {"add_d_form"}, method = RequestMethod.POST)
-     public String add_d_form(Model model, @RequestParam(value="first_name", required=false) String fName, // 
+     public String add_d_form(Model model, HttpServletRequest request, @RequestParam(value="first_name", required=false) String fName, // 
     	@RequestParam(value="last_name", required=false) String lName, @RequestParam(value="delete_task", required=true) String del_task ) {
     	
     	List<EmpIDInfo1p1> lst = new ArrayList<>(); // list of objects (employee ID)
-    	// boolean name_entered = false; // did the user enter the employee ID, first name, last name (if the admin is logged in)
     	String empID = ""; 
     	String first_name = ""; // first name without '
     	String last_name = ""; // last name without '
     	
     	model.addAttribute("is_add_del_task","true"); // it is Add Task or Delete Task
-    	model.addAttribute("read_add_d", "true"); // whether the is_add_del_task attribute is set ( used by the JSP )
+    	model.addAttribute("read_add_d", "true"); // whether the is_add_del_task attribute is set (used by the JSP)
     	model.addAttribute("logged_in", "false"); // now is the user not logging in 
     	model.addAttribute("logged_out", "false"); // now is the user not logging out 
-    	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
-    	// name_entered = true; // did the user enter the name in the form
+    	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
     	first_name = fName;
     	last_name = lName;
     	fName = TimeMngLibrary.addApostrophe(fName);
     	lName = TimeMngLibrary.addApostrophe(lName);
-    	this.fName = fName;
-    	this.lName = lName;
+    	request.getSession().setAttribute("fName", fName);
+    	request.getSession().setAttribute("lName", lName);
     	
     	// determine the empID
     	// add to the SQL query the WHERE clause - where (firstName = first name of the employee) and (lastName = last name of the employee)	
@@ -649,7 +678,7 @@ public class MainController1p1 {
     		model.addAttribute("is_red", "true"); // adding to the model : the text needs to be shown in red
     		model.addAttribute("logged_in", "false"); // the user is now not logging in 
         	model.addAttribute("logged_out", "false"); // the user is now not logging out 
-        	model.addAttribute("already_login", "true"); // did the user log in before ( and is still logged in )
+        	model.addAttribute("already_login", "true"); // did the user log in before (and is still logged in)
         	return "result";
     	}
     	return "show_task_info";
@@ -688,11 +717,13 @@ public class MainController1p1 {
     
     // if the requested URL is localhost:8080/add_d_res and method is POST
     @RequestMapping(value = {"/add_d_res"}, method = RequestMethod.POST)
-    public String add_d_res(Model model, @RequestParam(value="task_name", required=true) String enter_tname, // 
+    public String add_d_res(Model model, HttpServletRequest request, @RequestParam(value="task_name", required=true) String enter_tname, // 
         @RequestParam(value="task_date", required=true) String enter_tdate, @RequestParam(value="start_time", required=true) String enter_stime, //
         @RequestParam(value="end_time", required=false) String enter_etime, @RequestParam(value="delete_task", required=true) String del_task) {
     	
     	String employeeID = "";
+    	String fName = ""; // the employee's first name
+    	String lName = ""; // the employee's last name
     	boolean add_succ = false; // success of the adding of the record to the database
     	boolean del_query = false; // success of the building the SQL query (DELETE)
     	int numRows = -1; // number of affected rows (Delete Task) 
@@ -702,8 +733,10 @@ public class MainController1p1 {
     	List<EmpIDInfo1p1> lstEmp = new ArrayList<>(); // list of objects (employeeID)
     	enter_tname = TimeMngLibrary.addApostrophe(enter_tname); // if there is an ' in the task name add another one (because of the SQL query)
     	try {
+    		fName = (String)request.getSession().getAttribute("fName");
+    		lName = (String)request.getSession().getAttribute("lName");
     		if ((fName == null && lName == null) || (fName.equals("") && lName.equals(""))) { // regular user (there is no input field for the first and last name)
-    			employeeID = empID; // from the login
+    			employeeID = (String)request.getSession().getAttribute("empID"); // read the empID session attribute from the login
     		} else { // administrator 
 	    		empIDDAO.addToQueryStrID(fName, lName);
 				lstEmp = empIDDAO.getEmployeeID(fName, lName);
@@ -809,7 +842,7 @@ public class MainController1p1 {
         model.addAttribute("is_admin", "false"); // the user is not logged in as admin
     	model.addAttribute("logged_in", "false"); // the user is not logged in 
     	model.addAttribute("logged_out", "false"); // setting the attribute logged_out to false - the user is not logging out
-    	model.addAttribute("already_login", "false"); // did the user log in before ( and is still logged in )
+    	model.addAttribute("already_login", "false"); // did the user log in before (and is still logged in)
         return "contact_form"; // return the contact_us.jsp
     }
     
@@ -896,9 +929,9 @@ public class MainController1p1 {
 		    		if (lst != null)
 		    			employeeID = lst.get(0).getEmployeeID();
 		    		else { // the employee doesn't exist
-		    			model.addAttribute("page_title", "Contact Us"); // the title of the page ( adding to the model )
+		    			model.addAttribute("page_title", "Contact Us"); // the title of the page (adding to the model)
 		    			model.addAttribute("message_shown", "The employee with that first and last name doesn't exist and the message wasn't added to the database. Please contact the administrator!"); // adding the message to the model
-		    	        model.addAttribute("is_red", "true"); // the message should be in red ( adding  it to the model )
+		    	        model.addAttribute("is_red", "true"); // the message should be in red (adding  it to the model)
 		    	        model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
 		    	        return "result";
 		    		}
@@ -918,15 +951,15 @@ public class MainController1p1 {
 		    }
 		    // adding the email and the message was successful
 		    if ((numRowsUpd>0) && (numRowsMssg>0)) {
-			    model.addAttribute("page_title", "Contact Us"); // the title of the page ( adding to the model )
+			    model.addAttribute("page_title", "Contact Us"); // the title of the page (adding to the model)
 				model.addAttribute("message_shown", "The message was successfully sent!"); // adding the message to the model
-	        	model.addAttribute("is_red", "false"); // the message should be in red ( adding  it to the model )
+	        	model.addAttribute("is_red", "false"); // the message should be in red (adding  it to the model)
 	        	model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
 	        	return "result";
 		    } else { // a problem occurred while adding the email and the message
 		    	model.addAttribute("page_title", "Contact Us"); // the title of the page (adding to the model)
 		    	model.addAttribute("message_shown", "A problem occured while accessing the database!"); // adding the message to the model
-	        	model.addAttribute("is_red", "true"); // the message should be in red ( adding  it to the model )
+	        	model.addAttribute("is_red", "true"); // the message should be in red (adding  it to the model)
 	        	model.addAttribute("logged_in", "true"); // setting the attribute logged_in to true - the user is logged in
 			    return "result";	
 		    }
@@ -955,6 +988,7 @@ public class MainController1p1 {
     	List<CustNameInfo1p1> lst = new ArrayList<>(); // list of objects (customer ID, first name, last name)
     	List<CustIDInfo1p1> lstID = new ArrayList<>(); // list of objects (customerID)
     	String customerID = "";
+    	
     	email = TimeMngLibrary.addApostrophe(email); // adds 1 apostrophe before the ' (for adding the string which contains ' to the DB)
 		mssg = TimeMngLibrary.addApostrophe(mssg);
 		f_Name = TimeMngLibrary.addApostrophe(f_Name);
@@ -989,7 +1023,7 @@ public class MainController1p1 {
 			    		i++;
 			    	}
 		    	
-		    	if (!foundEmail) { // the email doesn't exist in the database ( the customer exists in the DB )  
+		    	if (!foundEmail) { // the email doesn't exist in the database (the customer exists in the DB)  
 		    		// the query for inserting the customer (first name, last name, email) (the customer in the DB could be another customer)
 		    		custEmailDAO.addToQueryAddCust(f_Name, l_Name, email);
 		    		// running the query 
@@ -1009,7 +1043,7 @@ public class MainController1p1 {
 		    			customerID = lst.get(0).getCustomerID();
 		    			numRowsUpd = 1; // the email already exists in the database
 		    	}
-		    	// if the query above of updating the email for the customer with the customer ID was successful ( or the email was already in the database and didn't get changed ) 
+		    	// if the query above of updating the email for the customer with the customer ID was successful (or the email was already in the database and didn't get changed) 
 		    	if (numRowsUpd>0) {
 		    		msgcustDAO.addToQueryInsert(customerID, mssg);
 		    		// add the entered message to the table msg_cust
@@ -1054,14 +1088,6 @@ public class MainController1p1 {
         	model.addAttribute("logged_in", "false"); // setting the attribute logged_in to true - the user is not logged in
         	return "result";
     	}
-    }
-    
-    // if the requested URL is localhost:8080/log_in, method is GET do 
-    @RequestMapping(value = {"log_in"}, method = RequestMethod.GET)
-    public String log_in(Model model) {
-        String message = "Log In";
-        model.addAttribute("message", message);
-        return "log_in"; // return the log_in.jsp
     }
     
     // if the requested URL is localhost:8080/log_out, method is GET do 

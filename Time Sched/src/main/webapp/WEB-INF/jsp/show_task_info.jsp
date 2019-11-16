@@ -127,8 +127,11 @@
 	  var val_min = true; // is the value entered for minute < 60
 	  var minutes = 0;
 	  var hours = 0;
+	  var pos_colon = -1; // position of the :
+      var colon_missing = false; // there is no :
 	  var min_pos; // position of digits in the minute
 	  var is_digit = true; // is the character a digit
+	  var is_space = false; // when going through the time is the character space
 	  var valid_time = true; // whether the hours <= 12, the minutes < 60
 			
 	  // the time in the input field
@@ -150,78 +153,89 @@
 	  }
 			
 	  if (pos < 0) {
+		valid_time = false;
 		setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+	  } else {
+	    pos_colon = str_time.indexOf(":"); 
+	    if (pos_colon < 0) { // there is no : (it is not a valid time)
+	    	valid_time = false;
+	    	colon_missing = true;
+	    	setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+	    }
 	  }
-				
-	  if (pos > 0) { // AM or am or PM or pm were found
-		pos_colon = str_time.indexOf(":"); 
+	  
+	  if (pos > 0 && pos_colon > 0) { // AM or am or PM or pm and : were found
 		min_pos = pos_colon + 1;
 		var pos_diff = min_pos - pos_colon; 
-		while (is_digit && pos_diff <= 2) { // does the minute have only 2 digits
+		while (is_digit && !is_space && pos_diff <= 2) { // does the minute have only 2 digits
 		  pos_diff = min_pos - pos_colon;
 		  character = str_time.charAt(min_pos);
 		  if (character == ' ') {
-			is_digit = false;
+			is_space = true;
 		  } else {
 			is_digit = !(isNaN(str_time.charAt(min_pos)));
-		  }
-					
+		  }		
 		  min_pos++;
 		}
-				
-		min_pos--; // at the end of the loop I increased the min_pos for 1
-		if ((pos_diff == 3) && ((min_pos === pos) || ((min_pos+1 === pos) && (character ===' ')))){
-		  if (pos_colon == 1 || pos_colon == 2) { // : is at the required position
-			hours = str_time.substring(0, pos_colon);
-			val_hour = isValHour( hours ); // is the number before the : <= 12
-			if (val_hour) { // the hour is valid
-			  min1 = str_time.charAt(pos_colon + 1);  // first digit of the minute
-			  if (!isNaN(min1)) { // min1 is a digit
-				min2 = str_time.charAt(pos_colon + 2);  // second digit of the minute
-			  if (!isNaN(min2)) { // min2 is a digit
-				min = min1 + min2; // concatenate min1 and min2
-				val_min = isValMin(min); // is the min < 60
-				if (val_min === false) {
-				  valid_time = false; // the minute is not < 60, later the message is shown that the minute should be < 60, or the hour should be <= 12
-				  setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
-				} else {
-				  setStartEndT(start); // sets the var. START_T_VAL or END_T_VAL to 'true'
-				}
-			  } else { // the start time or the end time is not valid
-				setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
-			  }
-			} else { // the start time or the end time is not valid
-			  setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
-			}
-		  } else { // the hour is not valid
-			valid_time = false; // the hour is not <= 12, later the message is shown that the minute should be < 60, or the hour should be <= 12
-			setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
-		  }				
-		} else { // the time is NOT valid (the : is not at the right position)
-		  setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
-		}
-	  } else { // the minute doesn't have 2 digits
-		setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'true'	
-	  }		
-	}
-			
-    if (valid_time === false){
-	  document.getElementById(msg_field).innerHTML = "* The Hours Should Be Less Or Equal Than 12 And The Minutes Should Be Less Than 60"
-	} else if (START_T_VAL === 'true' && END_T_VAL === 'true') {
-	  document.getElementById(msg_field).innerHTML = "* Required Field";
-	} else {
-	  document.getElementById(msg_field).innerHTML = "* The Time Has To Be In Required Format"; // show the message
-    }
-  }
 		
-  // checkForm: if the validation was successful return TRUE otherwise return FALSE
-  function checkForm() {
-    if (START_T_VAL === 'true' && END_T_VAL === 'true' && DATE_VAL === 'true') { 
-	  return true;
-	} else {
-	  return false;
-	}
-  }
+		if (is_digit) {		
+		  min_pos--; // at the end of the loop I increased the min_pos for 1
+		  if ((pos_diff == 3) && ((min_pos === pos) || ((min_pos+1 === pos) && (character ===' ')))) {
+		    if (pos_colon == 1 || pos_colon == 2) { // : is at the required position
+			  hours = str_time.substring(0, pos_colon);
+			  val_hour = isValHour( hours ); // is the number before the : <= 12
+			  if (val_hour) { // the hour is valid
+			    min1 = str_time.charAt(pos_colon + 1);  // first digit of the minute
+			    if (!isNaN(min1)) { // min1 is a digit
+				  min2 = str_time.charAt(pos_colon + 2);  // second digit of the minute
+			      if (!isNaN(min2)) { // min2 is a digit
+				    min = min1 + min2; // concatenate min1 and min2
+				    val_min = isValMin(min); // is the min < 60
+				    if (val_min === false) {
+				      valid_time = false; // the minute is not < 60, later the message is shown that the minute should be < 60, or the hour should be <= 12
+				      setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+				    } else {
+				      setStartEndT(start); // sets the var. START_T_VAL or END_T_VAL to 'true'
+				    }
+			      } else { // the start time or the end time is not valid
+				    setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+			      }
+			    } else { // the start time or the end time is not valid
+			      setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+			    }
+		      } else { // the hour is not valid
+			    valid_time = false; // the hour is not <= 12, later the message is shown that the minute should be < 60, or the hour should be <= 12
+			    setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+		      }				
+		    } else { // the time is NOT valid (the : is not at the right position)
+		      setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+		    }
+	      } else { // the minute doesn't have 2 digits
+		    setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'true'	
+	      }		
+	    } else {
+	    	valid_time = false;
+	    	setStartEnd(start); // sets the var. START_T_VAL or END_T_VAL to 'false'
+	    }
+	  }
+		
+	  if (colon_missing || !is_space) {
+		  document.getElementById(msg_field).innerHTML = "* The Time Has To Be In Required Format"
+	  } else if (valid_time === false) {
+	    document.getElementById(msg_field).innerHTML = "* The Hours Should Be Less Or Equal Than 12 And The Minutes Should Be Less Than 60"
+	  } else {
+	    document.getElementById(msg_field).innerHTML = "* Required Field"; // show the message
+      }
+    }
+		
+    // checkForm: if the validation was successful return TRUE otherwise return FALSE
+    function checkForm() {
+      if (START_T_VAL === 'true' && END_T_VAL === 'true' && DATE_VAL === 'true') { 
+	    return true;
+	  } else {
+	    return false;
+	  }
+    }
 			
   </script>
 </head>

@@ -51,7 +51,7 @@
 		    <%
 			   } else if (add_login.equals("true")) { // the administrator is adding a new log in (for the new emp.)
 		    %>
-		         <!-- after clicking on the button localhost:8080/addempl_form is called using method post -->
+		         <!-- after clicking on the button localhost:8080/addshow_emp is called using method post -->
 		         <form action="/addshow_emp" name="addshow" id="addshow" method="post">
 		    <%
 			   }
