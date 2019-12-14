@@ -1,8 +1,8 @@
 <%-- 
-    Document   : updateDB
+    Document   : updateDB called from update_form.jsp
     Created on : 14-Mar-2019, 04:09:42
     Author     : Ingrid Farkas
-    called from update_form.jsp
+    Project    : Aqua Bookstore
 --%>
 
 <%@page import="java.sql.ResultSet"%>
@@ -44,7 +44,7 @@
                     if (rs.next()) 
                         publid = rs.getString("publ_id");
                     return publid;
-                } catch ( SQLException ex) {
+                } catch (SQLException ex) {
                     return ""; // if an exception occurred return publisher id = ""
                 }
             }
@@ -111,9 +111,9 @@
                 boolean exists_val = false; // the value was entered in the input field
 
                 // DETERMINING the PUBLISHER ID 
-                if (!((form_publ.equalsIgnoreCase("")))){
+                if (!((form_publ.equalsIgnoreCase("")))) {
                     // determinePublID : creating and runnung the query SELECT publ_id, city FROM publisher WHERE publ_name='...' AND city='...';
-                    publid = determinePublID(form_publ, stmt); // determine the publisher ID for that publisher ( in the city )
+                    publid = determinePublID(form_publ, stmt); // determine the publisher ID for that publisher (in the city)
 
                     if (publid.equals("")) { // the publisher with that name doesn't exist, add the new publisher to the publisher table
                         // creating the string "INSERT INTO publisher(publ_name, city) VALUES ('...', '...');
@@ -183,7 +183,6 @@
                     is_added = true;
                 }
 
-
                 // if there is a new isbn add to the query isbn = form_isbn
                 if (!((form_isbn.equalsIgnoreCase("")))) {
                     // if I added title='...' then add the comma
@@ -197,7 +196,7 @@
                 // if there is a new price add to the query price = form_price
                 form_price = form_price.replaceAll(" ", "");
                 if (!((form_price.equalsIgnoreCase("")))) {
-                    // if I added isbn='...' ( or some other column ) then add the comma
+                    // if I added isbn='...' (or some other column) then add the comma
                     if (is_added){
                         query += ",";
                     }
@@ -207,7 +206,7 @@
 
                 // if there is a new pages add to the query pages = form_pages
                 if (!((form_pages.equalsIgnoreCase("")))) {
-                    // if I added price='...' ( or some other column ) then add the comma
+                    // if I added price='...' (or some other column) then add the comma
                     if (is_added){
                         query += ",";
                     }
@@ -217,7 +216,7 @@
 
                 // if there is a new category add to the query category = form_categ
                 if (!((form_categ.equalsIgnoreCase("")))) {
-                    // if I added pages='...' ( or some other column ) then add the comma
+                    // if I added pages='...' (or some other column) then add the comma
                     if (is_added){
                         query += ",";
                     }
@@ -227,7 +226,7 @@
 
                 // if there is a new descr add to the query descr = form_descr
                 if (!((form_descr.equalsIgnoreCase("")))) {
-                    // if I added category='...' ( or some other column ) then add the comma
+                    // if I added category='...' (or some other column) then add the comma
                     if (is_added){
                         query += ",";
                     }
@@ -237,7 +236,7 @@
 
                 // if there is a new year published add to the query publ_year = form_yrpublished
                 if (!((form_yrpublished.equalsIgnoreCase("")))) {
-                    // if I added category='...' ( or some other column ) then add the comma
+                    // if I added category='...' (or some other column) then add the comma
                     if (is_added){
                         query += ",";
                     }

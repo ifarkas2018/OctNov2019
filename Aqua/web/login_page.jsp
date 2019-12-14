@@ -2,9 +2,10 @@
     Document   : login_page.jsp
     Created on : 31-Mar-2019, 21:15:08
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- login_page.jsp - when the user clicks on the Login link ( the navigation bar ) this web page is shown -->
+<!-- login_page.jsp - when the user clicks on the Login link (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="miscellaneous.AquaMethods"%>
 

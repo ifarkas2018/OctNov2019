@@ -2,6 +2,7 @@
     Document   : contact_info
     Created on : 10-Apr-2019, 19:49:41
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,12 +24,12 @@
             
             /* color of the email link when the user hovers on it */
             .email a:hover, a:active {
-                color: #7F8C8D !important;   /* rgb(215,152,235) darker grey #7F8C8D*/ 
+                color: #7F8C8D !important;   /* @@@@@@@@@@@@@@@@ rgb(215,152,235) darker grey #7F8C8D*/ 
             } 
             
             /* color of the email link */ 
             .email a {
-                color: #17A2B8 !important;  /* color of the Subscribe button in the footer */
+                color: #17A2B8 !important;  
             }
       
         </style>
@@ -58,10 +59,10 @@
                             <div class="col">
                                 &nbsp; &nbsp;
                                 <br />
-                                <h3>Contact Us</h3>
+                                <h3  class="text-info">Contact Us</h3>
                                 <br/>
                                 <!-- information about the store - London -->
-                                <span class="text-info">
+                                <span class="text-warning">
                                     <font size="+2">London</font>
                                 </span>
                                 <br />
@@ -72,7 +73,7 @@
                                 </span>
                                 <br />
                                 <br />
-                                <!-- opening hours ( in a table ) -->
+                                <!-- opening hours (in a table) -->
                                 <table class="table table-bordered table-sm">
                                     <thead>
                                         <tr class="table-active">
@@ -81,7 +82,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="table-light">
-                                          <th scope="row">Monday-Friday</th>
+                                          <th scope="row">Monday - Friday</th>
                                           <td>10.00 am - 9.30 pm</td>
                                         </tr>
                                         <tr class="table-light">
@@ -95,7 +96,7 @@
                                     </tbody>
                                 </table>
                                 <!-- information about the store - Norwich -->
-                                <span class="text-info">
+                                <span class="text-warning">
                                     <font size="+2">Norwich</font><br />
                                 </span>
                                 78 Main Street, London S2H 8LS <br />
@@ -108,7 +109,7 @@
                                 <br />
                                 <br />
                                 
-                                <!-- opening hours ( in a table ) -->
+                                <!-- opening hours (in a table) -->
                                 <table class="table table-bordered table-sm">
                                     <thead >
                                         <tr class="table-active">
@@ -117,7 +118,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="table-light">
-                                            <th scope="row">Monday-Friday</th>
+                                            <th scope="row">Monday - Friday</th>
                                             <td>7.00 am - 9.30 pm</td>
                                         </tr>
                                         <tr class="table-light">
@@ -145,4 +146,3 @@
         </div> 
     </body>
 </html>
-

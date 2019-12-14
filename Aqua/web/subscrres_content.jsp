@@ -2,6 +2,7 @@
     Document   : subscrres_content
     Created on : 16-Apr-2019, 16:28:06
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +21,7 @@
         </style>
         
         <script>
-            function setFillIn(){
+            function setFillIn() {
                 document.cookie = "fill_in=true;"; // should the user return to the form he was on before subscribing the fill_in should be true
             }
         </script>
@@ -58,11 +59,11 @@
                                     exOccurred = String.valueOf(hSession.getAttribute("db_exoccurred"));
                                     
                                     if (validEmail.equalsIgnoreCase("false"))
-                                        out.print( "<span class=\"red_text\">You entered an invalid email address!</span>" );
+                                        out.print("<span class=\"red_text\">You entered an invalid email address!</span>");
                                     else if (exOccurred.equalsIgnoreCase("exists"))
-                                        out.print( "<span class=\"red_text\">The email you entered already exists in the database!</span>" );
+                                        out.print("<span class=\"red_text\">The email you entered already exists in the database!</span>");
                                     else if (exOccurred.equalsIgnoreCase("true"))
-                                        out.print( "<span class=\"red_text\">An error occurred while accessing the database!</span>" ); 
+                                        out.print("<span class=\"red_text\">An error occurred while accessing the database!</span>"); 
                                     else {
                                         out.print("Your email was added successfully to the database.<br />Thank you for subscribing to our newsletter!");
                                     } 

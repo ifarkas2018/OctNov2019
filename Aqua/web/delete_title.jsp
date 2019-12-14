@@ -1,10 +1,11 @@
 <%-- 
     Document   : delete_title
     Created on : 21-Mar-2019, 14:51:52
-    Author     : user
+    Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- delete_title.jsp - when the user clicks on the Delete Book link ( the navigation bar ) this web page is shown -->
+<!-- delete_title.jsp - when the user clicks on the Delete Book link (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

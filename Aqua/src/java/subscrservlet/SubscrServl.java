@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * SubscribeServl.java : after clicking on the Subscribe button ( footer.jsp ) this servlet is called
+ * SubscribeServl.java: after clicking on the Subscribe button (footer.jsp) this servlet is called
  */
 package subscrservlet;
 
@@ -107,7 +107,7 @@ public class SubscrServl extends HttpServlet {
                         }
                         cookie_val = cookie.getValue();
                         // I am adding this value to the session - because of the SUBSCRIPTION
-                        // the IDEA of the SUBSCRIPTION : after entering the email address and clicking on the button ( Subscribe ) the page is shown whether
+                        // the IDEA of the SUBSCRIPTION : after entering the email address and clicking on the button (Subscribe) the page is shown whether
                         // the user successfully subscribed to the newsletter - after that when the user clicks on the Close button the web page which was before
                         // loaded has to be loaded with the values - these values are the values I am writing to the session
                         hSession2.setAttribute(cookie_name, cookie_val);
@@ -119,7 +119,7 @@ public class SubscrServl extends HttpServlet {
             
             Cookie[] cookies = request.getCookies();
             // going throught the cookies
-            for (Cookie cookie:cookies){
+            for (Cookie cookie:cookies) {
                 String cookie_name = cookie.getName();
                 if (cookie_name.equalsIgnoreCase("valid_email")){
                     // is the email valid
@@ -131,13 +131,13 @@ public class SubscrServl extends HttpServlet {
             
             // method addEmail adds the new email for the subscription to the table subscription
             // returns TRUE if an exception occurred, otherwise it returns FALSE
-            if (valid_email.equalsIgnoreCase("true")){
+            if (valid_email.equalsIgnoreCase("true")) {
                 exOccurred = SubscrDAO.addEmail(subscrEmail);
             }
             hSession2.setAttribute("db_exoccurred", exOccurred );
             // show the page subscrres_page.jsp
             response.sendRedirect("subscrres_page.jsp"); // redirects the response to subscrres_page.jsp
-        } catch ( Exception theException){ // Throwable
+        } catch (Exception theException){ // Throwable
             
         }
     }

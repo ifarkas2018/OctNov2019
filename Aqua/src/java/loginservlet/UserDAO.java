@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * UserDAO.java : handles running the SQL query ( LoginServlet.java - method doPost, SignUpServlet - method doPost )
+ * UserDAO.java : handles running the SQL query (LoginServlet.java - method doPost, SignUpServlet - method doPost)
  */
 package loginservlet;
 

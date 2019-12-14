@@ -2,9 +2,10 @@
     Document   : about_page
     Created on : 12-May-2019, 05:26:56
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- about_page.jsp - when the user clicks on the About link ( the navigation bar ) this web page is shown -->
+<!-- about_page.jsp - when the user clicks on the About link (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

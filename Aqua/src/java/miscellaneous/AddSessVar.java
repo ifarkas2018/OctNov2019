@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * AddSessVar.java : this servlet is called to read the values in cookies ( JavaScript ) and to add them as session var.
+ * AddSessVar.java : this servlet is called to read the values in cookies (JavaScript) and to add them as session var.
  */
 package miscellaneous;
 
@@ -45,7 +45,7 @@ public class AddSessVar extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method. 
      *
      * @param request servlet request
      * @param response servlet response
@@ -63,7 +63,7 @@ public class AddSessVar extends HttpServlet {
             
             Cookie[] cookies = request.getCookies(); // retrieving the array of cookies
             // going throught the cookies
-            for (Cookie cookie:cookies){
+            for (Cookie cookie:cookies) {
                 // get the name of the cookie
                 String cookie_name = cookie.getName();
 
@@ -72,7 +72,7 @@ public class AddSessVar extends HttpServlet {
                 boolean is_webpg_name = cookie_name.equalsIgnoreCase("webpg_name");
 
                 String cookie_val = cookie.getValue();
-                // if the cookie contains the name of the web page to be shown set the session variable cookie_name ( = webpg_name )
+                // if the cookie contains the name of the web page to be shown set the session variable cookie_name (= webpg_name)
                 // to the cookie_val
                 if ((is_webpg_name) || (is_fill_in))
                     hSession2.setAttribute(cookie_name, cookie_val);

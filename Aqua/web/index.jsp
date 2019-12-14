@@ -2,6 +2,7 @@
     Document   : index
     Created on : 02-Sep-2018, 01:41:44
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- author: Ingrid Farkas -->
@@ -23,8 +24,8 @@
             HttpSession hSession = AquaMethods.returnSession(request);
             
             if (AquaMethods.sessVarExists(hSession, "fill_in")) {  
-                // set the value of fill_in to default ( whether there are some session var. which contain values of the input fields
-                // that need later to be filled in )
+                // set the value of fill_in to default (whether there are some session var. which contain values of the input fields
+                // that need later to be filled in)
                 hSession.setAttribute("fill_in","false");  
             }
             
@@ -43,6 +44,5 @@
         <!-- including the file footer.jsp into this file -->
         <!-- footer.jsp contains the footer of the web page --> 
         <%@ include file="footer.jsp"%> 
-        
     </body>
 </html>

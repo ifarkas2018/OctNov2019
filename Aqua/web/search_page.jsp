@@ -2,9 +2,10 @@
     Document   : search_page
     Created on : 18-Sep-2018, 01:38:47
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- search_page.jsp - when the user clicks on the Search button ( the navigation bar ) this web page is shown -->
+<!-- search_page.jsp - when the user clicks on the Search button (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 

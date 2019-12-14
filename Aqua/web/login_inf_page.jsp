@@ -1,10 +1,11 @@
 <%-- 
     Document   : login_inf_page.jsp
     Created on : 06-Oct-2019, 20:10:55
-    Author     : user
+    Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- login_info_page.jsp - when the user clicks on the Login link ( the navigation bar ) this web page is shown -->
+<!-- login_info_page.jsp - when the user clicks on the Login link (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

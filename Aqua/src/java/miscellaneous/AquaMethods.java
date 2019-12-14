@@ -9,21 +9,15 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import java.sql.Connection;
-import connection.ConnectionManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class AquaMethods {
     
-    public static HttpSession returnSession( HttpServletRequest request ){
-        HttpSession hSession = request.getSession(); // retrieve the session ( to which I am going to add and read variables )
+    public static HttpSession returnSession(HttpServletRequest request) {
+        HttpSession hSession = request.getSession(); // retrieve the session (to which I am going to add and read variables)
         return hSession;
     }
     
     // sessVarExists: returns whether the session var. named name exists in the hSession
-    public static boolean sessVarExists(HttpSession hSession, String name){ 
+    public static boolean sessVarExists(HttpSession hSession, String name) { 
         boolean attr_found = false; // is the atribute named name one of variables in the session
         String attrName = ""; // the name of the attribute in the session
         Enumeration enumAttr; // enumeration of variable names added to the session
@@ -39,10 +33,10 @@ public class AquaMethods {
     
     // readSetSessV : reads and returns the session variable named sessVar
     // sessVar : name of the session variable
-    public static String readSetSessV( HttpSession hSession, String sessVar ){
+    public static String readSetSessV( HttpSession hSession, String sessVar ) {
         String readVal = "";
         
-        // if the user entered the email ( Subscribe ) then read the session var. sessVar
+        // if the user entered the email (Subscribe) then read the session var. sessVar
         if (AquaMethods.sessVarExists(hSession, sessVar)) { 
             readVal = String.valueOf(hSession.getAttribute(sessVar));
             if (!readVal.equalsIgnoreCase("")) { 
@@ -53,7 +47,7 @@ public class AquaMethods {
     }
     
     // setToEmptyInput: set the session variable values to "" for the variables named input0, input1, ...
-    public static void setToEmptyInput(HttpSession hSession){
+    public static void setToEmptyInput(HttpSession hSession) {
         String attrName = ""; // the name of the attribute in the session
         Enumeration enumAttr; // enumeration of variable names added to the session
         enumAttr = hSession.getAttributeNames(); // the names of the session variables 
@@ -76,9 +70,9 @@ public class AquaMethods {
         }
     }
     
-    // addBackslash : adds 2 back slashes ( if isApostrophy = true )  before the ' 
-    // or 3 back slashes ( if isApostrophy = false )  before the \ before EVERY appearance of that character
-    // used to add the description ( or some other string ) to the database
+    // addBackslash : adds 2 back slashes (if isApostrophy = true)  before the ' 
+    // or 3 back slashes (if isApostrophy = false)  before the \ before EVERY appearance of that character
+    // used to add the description (or some other string) to the database
     public static String addBackslash(String descr, boolean isApostrophy){
         
         String newDescription = ""; // the description where I add \ before the '
@@ -104,8 +98,8 @@ public class AquaMethods {
         if (pos<0)
             newDescription = descr;
         
-        // while the next \ is found in the string substitute it with \\\\ ( or while the next ' is found in the string substitute it with \\' ) 
-        while (pos >= 0){
+        // while the next \ is found in the string substitute it with \\\\ (or while the next ' is found in the string substitute it with \\') 
+        while (pos >= 0) {
             newDescription = "";
             prev_pos = pos-1;
             
@@ -130,7 +124,7 @@ public class AquaMethods {
     }
     
     // addBacksl : calls the method that replaces every occurence of \ with \\\\ and replaces every occurence of ' with \\'
-    public static String addBacksl(String descr){
+    public static String addBacksl(String descr) {
         boolean isApostrophy = false; // is the character before which I need to add \\ a ' ( or a \ )
                 
         // replacing every occurence of \ with \\\\
@@ -144,7 +138,7 @@ public class AquaMethods {
     
     // deleteSpaces: removes space characters from the begining and end of the string, and replaces 2 or more white spaces with single space
     // inside of the string
-    public static String deleteSpaces(String str){
+    public static String deleteSpaces(String str) {
         String newString = str.trim(); // removing leading and trailing white space
         newString = newString.replaceAll("\\s+", " "); // replace 2 or more white spaces with single space
         return newString;

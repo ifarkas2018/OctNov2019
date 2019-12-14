@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * creates a connection to the database
+ * ConnectionManager.java: creates a connection to the database
  */
 package connection;
 

@@ -2,9 +2,10 @@
     Document   : signup_page.jsp
     Created on : 06-Apr-2019, 00:42:10
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- login_page.jsp - when the user clicks on the Login link ( the navigation bar ) for the employee this web page is shown -->
+<!-- login_page.jsp - when the user clicks on the Login link (the navigation bar) for the employee this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

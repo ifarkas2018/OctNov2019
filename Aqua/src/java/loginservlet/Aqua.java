@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * Aqua.java : for the URL: http://localhost:80880/AquaBooks/Aqua loads the web page index.jsp with the link for Login ( employees or administrators )
+ * Aqua.java : for the URL: http://localhost:80880/AquaBooks/Aqua loads the web page index.jsp with the link for Login (employees or administrators)
  */
 package loginservlet;
 

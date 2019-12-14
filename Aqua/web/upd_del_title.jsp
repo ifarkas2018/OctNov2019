@@ -1,11 +1,11 @@
 <%-- 
-    Document   : upd_del_title
+    Document   : upd_del_title called from update_prev.jsp, delete_title.jsp
     Created on : 14-Mar-2019, 04:27:45
     Author     : Ingrid Farkas
-    called from update_prev.jsp, delete_title.jsp
+    Project    : Aqua Bookstore
 --%>
 
-<!-- upd_del_title.jsp - shows the form for entering the title, author, ISBN of the book whose inform. is updated ( or deleted ) -->
+<!-- upd_del_title.jsp - shows the form for entering the title, author, ISBN of the book whose inform. is updated (or deleted) -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="miscellaneous.AquaMethods"%>
 
@@ -17,10 +17,10 @@
         
         <script>
             NUM_FIELDS = 3; // number of the input fields on the form  
-            NAME_VALIDATION  = 'true'; // does the Author's Name input field contain only letters ( and apostrophe )
+            NAME_VALIDATION  = 'true'; // does the Author's Name input field contain only letters (and apostrophe)
             NUM_VALIDATION  = 'true'; // does the ISBN input field contain only digits
             
-            // setCookie: creates cookie inputI = value in the input field ; ( I - number 0..2 )
+            // setCookie: creates cookie inputI = value in the input field ; (I - number 0..2)
             function setCookie() {           
                 var i;
                 var inp_names = new Array('prev_title', 'prev_author', 'prev_isbn'); // names of the input fields
@@ -30,17 +30,15 @@
                 } 
             }
             
-            // setDefaults : sets the values of the cookies ( input0, input1, input12 ) to the default and
+            // setDefaults : sets the values of the cookies (input0, input1, input12) to the default and
             // writes the content of every input field to the cookie
             function setDefaults() {
                 var i;
-                for ( i = 0; i < NUM_FIELDS; i++ ) {
+                for (i = 0; i < NUM_FIELDS; i++) {
                     document.cookie = "input" + i + "= "; // setting the VALUE of the cookie to EMPTY
                 }
                 setCookie(); // go through every input field and write its content to the cookie
             } 
-            
-            
         </script>
         
         <%
@@ -54,7 +52,7 @@
     <body onload="setDefaults()">
         <%
             final String PAGE_NAME = "update_prev.jsp"; // page which is loaded now 
-            // webpg_name: the name of the page to return to if the user enters the email ( subscribe ) 
+            // webpg_name: the name of the page to return to if the user enters the email (subscribe) 
             if (source.equals("Update Book")) {
                 hSession2.setAttribute("webpg_name", "update_prev.jsp");
             } else if (source.equals("Delete Book")) {
@@ -83,10 +81,9 @@
                                 &nbsp; &nbsp;
                                 <br/>
                                 <% 
-                                    out.print("<h3 class=\"text-info\">" + source + "</h3>"); // source is Update Book ( for the Update ), or Delete Book ( for the Delete )                                  
+                                    out.print("<h3 class=\"text-info\">" + source + "</h3>"); // source is Update Book (for the Update), or Delete Book (for the Delete)                                  
                                 %>
                                
-                                <br />
                                 <br />
                                 
                                 <form id="upd_del_book" name="upd_del_book" action="upd_del_page.jsp" onsubmit="return checkForm();" method="post">
@@ -97,7 +94,7 @@
                                     
                                     // IDEA : fill_in variable is set in SubscrServl.java - true if some of the input session variables were set,
                                     // and they need to be added to the form here - this is true if the user BEFORE LOADED THIS PAGE and after that he entered
-                                    // the email to subscribe ( in the footer ) and on the next page he clicked on Close
+                                    // the email to subscribe (in the footer) and on the next page he clicked on Close
                                     if (AquaMethods.sessVarExists(hSession2, "fill_in")) { 
                                         String fill_in = String.valueOf(hSession2.getAttribute("fill_in")); 
                                         // session variable page_name is set below. It is used if the user clicks on the Subscribe button and after that on
@@ -106,7 +103,7 @@
                                             String page_name = String.valueOf(hSession2.getAttribute("page_name"));
                                             // if the user clicked on the Close button on the page subscrres_content and this page was shown before (page_name)
                                             // and if something is stored in session variables input 
-                                            // then retrieve the session variable input0 ( to show it in the 1st input field 
+                                            // then retrieve the session variable input0 (to show it in the 1st input field) 
                                             if ((page_name.equalsIgnoreCase(PAGE_NAME)) && (fill_in.equalsIgnoreCase("true"))) {
                                                 if (AquaMethods.sessVarExists(hSession2, "input0")) {
                                                     input0 = String.valueOf(hSession2.getAttribute("input0")); // the value that was in the 1st input field
@@ -138,7 +135,7 @@
                                     <!-- creating the input element for the author -->
                                     <div class="form-group">
                                         <label for="prev_author">Author's Name</label> <!-- author's name label -->
-                                        <input type="text" class="form-control form-control-sm" name="prev_author" id="prev_author" maxlength="70" onfocusout="setCookie();valLetters(document.upd_del_book.prev_author, author_message, 'false');" value="<%= input1 %>" >  
+                                        <input type="text" class="form-control form-control-sm" name="prev_author" id="prev_author" maxlength="70" onfocusout="setCookie();valLetters(document.upd_del_book.prev_author, author_message, false, 'false');" value="<%= input1 %>" >  
                                         <span id="author_message" class="text_color"></span>
                                     </div>
                                     
@@ -146,20 +143,27 @@
                                     <div class="form-group"> 
                                         <label for="prev_isbn">ISBN</label> <!-- ISBN label -->
                                         <!-- input field for the ISBN: maximum 13 characters -->
-                                        <input type="text" class="form-control form-control-sm" maxlength="13" name="prev_isbn" id="prev_isbn" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "prev_isbn", "is_isbn", "isbn_message", document.upd_del_book.prev_isbn)' value="<%= input2 %>" > 
+                                        <input type="text" class="form-control form-control-sm" maxlength="13" name="prev_isbn" id="prev_isbn" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "prev_isbn", "is_isbn", "isbn_message", false, false)' value="<%= input2 %>" > 
                                         <span id="isbn_message" class="text_color"></span>
                                     </div>
                                     
-                                    <br />
+                                    <!-- adding a new container -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                &nbsp; &nbsp; <!-- adding some empty space -->
+                                            </div>
+                                        </div>    
+                                    </div>
             
                                     <%
                                         if (source.equals("Delete Book")) {
                                     %>
-                                            <!-- adding the button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                            <!-- adding the button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                             <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Submit</button>
                                     <%  } else {
                                     %>
-                                            <!-- adding the Next button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                            <!-- adding the Next button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                             <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Next</button>
                                     <% }
                                     %>
@@ -172,15 +176,6 @@
                                             </div>
                                         </div>    
                                     </div>
-
-                                    <!-- adding a new container -->
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col">
-                                                &nbsp; &nbsp; <!-- adding some empty space -->
-                                            </div>
-                                        </div>    
-                                    </div> 
                                 </form>  
                             </div> <!-- end of class="col" -->
                         </div> <!-- end of class="row" --> 

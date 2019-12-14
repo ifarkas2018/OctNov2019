@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * LoginServlet.java : when the user clicks on the Submit button ( login_form.jsp ) this servlet is called
+ * LoginServlet.java : when the user clicks on the Submit button (login_form.jsp) this servlet is called
  */
 package loginservlet;
 

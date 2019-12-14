@@ -1,7 +1,8 @@
 <%-- 
     Document   : login_inf_info.jsp
     Created on : 06-Oct-2019, 20:16:17
-    Author     : user
+    Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <%@page contentType = "text/html" pageEncoding = "UTF-8"%>
@@ -42,12 +43,13 @@
                                 &nbsp; &nbsp;
                                 <br/>
                                 <span>
-                                    <h3>Login</h3>
+                                    <h3 class="text-info">Login</h3>
                                 </span>
                                 <br/>
                                 <form id="login_inf" name="login_inf" action="login_page.jsp" method="post">
                                     Please use the following information to log in:
                                     <br/> 
+                                    <br/>
                                     <!-- showing administrator's username and password -->
                                     <span class="text-info">
                                         <font size="+2">Administrator</font>
@@ -62,10 +64,19 @@
                                     <span class="text-info">
                                         <font size="+2">Employee</font>
                                     </span>
-                                    <br />
                                     <ul>
                                         <li>username: ifarkas</li>
                                         <li>password: bird2018</li>    
+                                    </ul>
+                                    
+                                    <ul>
+                                        <li class="text_color">username: @@@@@@@@@@@</li>
+                                        <li class="text_color">password: @@@@@@@@@@@@</li>    
+                                    </ul>
+                                    
+                                    <ul>
+                                        <li class="text_color">username: @@@@@@@@@@@@</li>
+                                        <li class="text_color">password: @@@@@@@@@@@@</li>    
                                     </ul>
                                     
                                     <div class="container">
@@ -76,7 +87,7 @@
                                         </div>    
                                     </div>
                                     
-                                    <!-- adding the Submit button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                    <!-- adding the Submit button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                     <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Login</button>
                                 </form>
                             </div> <!-- end of class="col" -->

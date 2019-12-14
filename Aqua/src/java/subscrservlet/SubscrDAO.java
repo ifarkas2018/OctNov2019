@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * SubscrDAO.java : handles running the SQL query ( SubscrServl.java, method doPost )
+ * SubscrDAO.java : handles running the SQL query (SubscrServl.java, method doPost)
  */
 package subscrservlet;
 
@@ -30,7 +30,7 @@ public class SubscrDAO {
             // does that email already exist in the table subscription
             String query = "select * from subscription where email='" + subscrEmail + "';";
             rs = stmt.executeQuery(query);
-            if (!(rs.next())){ // if the email doesn't exist in the database ADD it to the DB    
+            if (!(rs.next())) { // if the email doesn't exist in the database ADD it to the DB    
                 PreparedStatement preparedStmt;
                 // 2. the insert statement
                 query = "insert into subscription(email) values ('" + subscrEmail + "');"; 

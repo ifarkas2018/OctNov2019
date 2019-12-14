@@ -2,6 +2,7 @@
     Document   : upd_del_form
     Created on : 13-Mar-2019, 11:36:48
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore    
 --%>
 
 <!-- upd_del_form.jsp - adds the form to the page Update Book -->
@@ -26,26 +27,27 @@
            
         </style>
         
+        
         <script>
             
             NUM_FIELDS = 11; // maximum number of the input fields on this and the previous forms             
             START = 3; 
            
-            // setCookie: creates cookie inputI = value in the input field ; ( I - number 3..11 )
+            // setCookie: creates cookie inputI = value in the input field ; (I - number 3..11)
             function setCookie() {
                 var i;
-                var inp_names = new Array( 'title', 'author', 'isbn', 'price', 'pages', 'category', 'descr', 'publisher', 'yrpublished' ); // names of the input fields
+                var inp_names = new Array('title', 'author', 'isbn', 'price', 'pages', 'category', 'descr', 'publisher', 'yrpublished'); // names of the input fields
                 // cookies named input0, input1, input2 were created in upd_del_title.jsp
-                for ( i = START; i <= NUM_FIELDS; i++ ) {
+                for (i = START; i <= NUM_FIELDS; i++) {
                     document.cookie = "input" + i + "=" + document.getElementById(inp_names[i-3]).value + ";"; // creating a cookie
                 } 
             }
             
-            // setDefaults : sets the values of the cookies ( input0, input1, input2 ) to the default
+            // setDefaults : sets the values of the cookies (input0, input1, input2) to the default
             function setDefaults() {              
                 var i;
                 
-                for ( i = START; i <= NUM_FIELDS; i++ ) {
+                for (i = START; i <= NUM_FIELDS; i++) {
                     document.cookie = "input" + i + "= "; // setting the VALUE of the cookie to EMPTY
                 }
                 setCookie(); // go through every input field and write its content to the cookie
@@ -88,7 +90,7 @@
             
             // IDEA : fill_in variable is set in SubscrServl.java - true if some of the input session variables were set,
             // and they need to be added to the form here - this true if the user BEFORE LOADED THIS PAGE and after that he entered
-            // the email to subscribe ( in the footer ) and on the next page he clicked on Close
+            // the email to subscribe (in the footer) and on the next page he clicked on Close
             if (AquaMethods.sessVarExists(hSession2, "fill_in")) { 
                 String fill_in = String.valueOf(hSession2.getAttribute("fill_in")); 
                 
@@ -99,7 +101,7 @@
                     
                     // if the user clicked on the Close button on the page subscrres_content and this page was shown before (page_name)
                     // and if something is stored in session variables input 
-                    // then retrieve the session variable input3..input11 to show it in the input field title ( and other fields )
+                    // then retrieve the session variable input3..input11 to show it in the input field title (and other fields)
                     if ((page_name.equalsIgnoreCase(PAGE_NAME)) && (fill_in.equalsIgnoreCase("true"))) {
                         if (AquaMethods.sessVarExists(hSession2, "input3")) {
                             input3 = String.valueOf(hSession2.getAttribute("input3")); // the value that was in this input field
@@ -128,12 +130,12 @@
                         if (AquaMethods.sessVarExists(hSession2, "input11")) {
                             input11 = String.valueOf(hSession2.getAttribute("input11"));
                         } 
-                        AquaMethods.setToEmptyInput( hSession2 ); // setToEmpty: set the session variable values to "" for the variables named input3, input4, ...
+                        AquaMethods.setToEmptyInput(hSession2); // setToEmpty: set the session variable values to "" for the variables named input3, input4, ...
                     }
                 }
                 hSession2.setAttribute("fill_in", "false"); // the input fields don't need to be filled in
             }
-            AquaMethods.setToEmptyInput( hSession2 ); // setToEmptyInput: set the session variable values to "" for the variables named input0, input1, ...
+            AquaMethods.setToEmptyInput(hSession2); // setToEmptyInput: set the session variable values to "" for the variables named input0, input1, ...
             hSession2.setAttribute("page_name", PAGE_NAME);
         %>
         
@@ -147,21 +149,21 @@
             
             String sQuery = "select b.title, b.price, b.isbn, b.pages, b.publ_year, b.descr, b.category, a.au_name, p.publ_name from book b, author a, publisher p where b.au_id = a.au_id and b.publ_id = p.publ_id";
             // previous_title: is the book title in the database which already exists
-            String previous_title = (String)hSession2.getAttribute("prev_title"); // retrieving the title from the session variable ( upd_del_title.jsp )
+            String previous_title = (String)hSession2.getAttribute("prev_title"); // retrieving the title from the session variable (upd_del_title.jsp)
             // previous_auth: is the author in the database which already exists
             String previous_auth = (String)hSession2.getAttribute("prev_auth"); // retrieving the author 
             // previous_isbn: is the isbn in the database which already exists
             String previous_isbn = (String)hSession2.getAttribute("prev_isbn"); // retrieving the ISBN
             
-            if (!((previous_title.equalsIgnoreCase("")))){
+            if (!((previous_title.equalsIgnoreCase("")))) {
                 sQuery += " and b.title='" + previous_title + "'";
             }
             
-            if (!((previous_auth.equalsIgnoreCase("")))){
+            if (!((previous_auth.equalsIgnoreCase("")))) {
                 sQuery += " and a.au_name='" + previous_auth + "'";
             }
             
-            if (!((previous_isbn.equalsIgnoreCase("")))){
+            if (!((previous_isbn.equalsIgnoreCase("")))) {
                 sQuery += " and b.isbn='" + previous_isbn + "'";
             }
             
@@ -229,6 +231,11 @@
                         <!-- horizontally centering the picture using center-image, img-fluid is for responsive image -->
                         <img src="images/books.png" class="img-fluid center-image" alt="picture of books" title="picture of books"> 
                     </div>
+                    <br /><br />
+                    <div> 
+                        <!-- horizontally centering the picture using center-image, img-fluid is for responsive image -->
+                        <img src="images/books.png" class="img-fluid center-image" alt="picture of books" title="picture of books"> 
+                    </div>
                 </div>
                 
                 <!-- the Bootstrap column takes 5 columns on the large desktops and 5 columns on the medium sized desktops -->
@@ -242,17 +249,16 @@
                                 <!-- Update -->
                                 <% if (source.equals("Update Book")) {
                                 %>
-                                    <h3 class="text-info">Update</h3>
+                                    <h3 class="text-info">Update Book</h3>
                                 <%
                                    } else if (source.equals("Delete Book")) {
                                 %>
                                     <!-- Delete -->
-                                    <h3 class="text-info">Delete</h3>
+                                    <h3 class="text-info">Delete Book</h3>
                                 <%
                                    }
                                 %>
                                 
-                                <br />
                                 <br />
                              
                                 <% if (source.equals("Update Book")) {
@@ -304,10 +310,10 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input4.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.update_book.author, author_message, 'false');" value="<%= input4 %>"> <!-- author input field -->
+                                                <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.upd_del_book.author, author_message, false, 'false');" value="<%= input4 %>"> <!-- author input field -->
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.update_book.author, author_message, 'false');" value="<%= au_name %>"> <!-- author input field -->
+                                                <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.upd_del_book.author, author_message, false, 'false');" value="<%= au_name %>"> <!-- author input field -->
                                             <% }
                                             %>
                                         <%
@@ -315,10 +321,10 @@
                                         %>
                                                 <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                                 <% if (!input4.equalsIgnoreCase("")) { %>
-                                                    <input type="text" class="form-control form-control-sm" disabled name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.update_book.author, author_message, 'false');" value="<%= input4 %>"> <!-- author input field -->
+                                                    <input type="text" class="form-control form-control-sm" disabled name="author" id="author" maxlength="70" value="<%= input4 %>"> <!-- author input field -->
                                                 <!-- otherwise read the record from the DB and show it -->
                                                 <% } else { %>
-                                                    <input type="text" class="form-control form-control-sm" disabled name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.update_book.author, author_message, 'false');" value="<%= au_name %>"> <!-- author input field -->
+                                                    <input type="text" class="form-control form-control-sm" disabled name="author" id="author" maxlength="70" value="<%= au_name %>"> <!-- author input field -->
                                                 <% }
                                                 %>
                                         <% 
@@ -335,10 +341,10 @@
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input5.equalsIgnoreCase("")) { %>
                                                 <!-- isbn input field : up to 13 characters can be entered -->
-                                                <input type="text" class="form-control form-control-sm" maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("update_book", "isbn", "is_isbn", "isbn_message", document.update_book.isbn)' value="<%= input5 %>"> 
+                                                <input type="text" class="form-control form-control-sm" maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "isbn", "is_isbn", "isbn_message", false, false)' value="<%= input5 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("update_book", "isbn", "is_isbn", "isbn_message", document.update_book.isbn)' value="<%= isbn %>"> 
+                                                <input type="text" class="form-control form-control-sm" maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "isbn", "is_isbn", "isbn_message", false, false)' value="<%= isbn %>"> 
                                             <% } %>
                                         <%
                                            } else if (source.equals("Delete Book")) {
@@ -346,10 +352,10 @@
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input5.equalsIgnoreCase("")) { %>
                                                 <!-- isbn input field : up to 13 characters can be entered -->
-                                                <input type="text" class="form-control form-control-sm" disabled maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("update_book", "isbn", "is_isbn", "isbn_message", document.update_book.isbn)' value="<%= input5 %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled maxlength="13" name="isbn" id="isbn" maxlength="13" value="<%= input5 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" disabled maxlength="13" name="isbn" id="isbn" maxlength="13" onchange="setCookie()" onfocusout='isNumber("update_book", "isbn", "is_isbn", "isbn_message", document.update_book.isbn)' value="<%= isbn %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled maxlength="13" name="isbn" id="isbn" maxlength="13" value="<%= isbn %>"> 
                                             <% } %>
                                         <% 
                                            } 
@@ -364,20 +370,20 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input6.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("update_book", "price", "is_price", "price_message", document.update_book.price)' value="<%= input6 %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "price", "is_price", "price_message", false, true)' value="<%= input6 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("update_book", "price", "is_price", "price_message", document.update_book.price)' value="<%= price %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "price", "is_price", "price_message", false, true)' value="<%= price %>"> 
                                             <% } %>
                                         <%
                                            } else if (source.equals("Delete Book")) {
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input6.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("update_book", "price", "is_price", "price_message", document.update_book.price)' value="<%= input6 %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="price" id="price" maxlength="6" value="<%= input6 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="price" id="price" maxlength="6" onchange="setCookie()" onfocusout='isNumber("update_book", "price", "is_price", "price_message", document.update_book.price)' value="<%= price %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="price" id="price" maxlength="6" value="<%= price %>"> 
                                             <% } %>
                                         <% 
                                            } 
@@ -392,20 +398,20 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input7.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "pages", "is_pages", "pages_message", document.update_book.pages)' value="<%= input7 %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "pages", "is_pages", "pages_message", false, false)' value="<%= input7 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "pages", "is_pages", "pages_message", document.update_book.pages)' value="<%= pages %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "pages", "is_pages", "pages_message", false, false)' value="<%= pages %>"> 
                                             <% } %>
                                         <%
                                            } else if (source.equals("Delete Book")) {
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input7.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "pages", "is_pages", "pages_message", document.update_book.pages)' value="<%= input7 %>"> 
+                                                <input type="text" class="form-control berform-control-sm" disabled name="pages" id="pages" maxlength="4" value="<%= input7 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="pages" id="pages" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "pages", "is_pages", "pages_message", document.update_book.pages)' value="<%= pages %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="pages" id="pages" maxlength="4" value="<%= pages %>"> 
                                             <% } %>
                                         <% 
                                            } 
@@ -422,37 +428,37 @@
                                             <% if (!input8.equalsIgnoreCase("")) { %>
                                                 <!-- creating a drop down list; form-control-sm is used for narrower control -->
                                                 <select  class="form-control form-control-sm" name="category" id="category" onchange="setCookie()">
-                                                    <% if (input8.equalsIgnoreCase("all")){ %>
+                                                    <% if (input8.equalsIgnoreCase("all")) { %>
                                                         <option value="all" selected>All Categories</option> <!-- options shown in the drop down list -->
                                                     <% } else { %>
                                                         <option value="all">All Categories</option>
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("fict")){ %>
+                                                    <% if (input8.equalsIgnoreCase("fict")) { %>
                                                         <option value="fict" selected>Fiction &amp; Poetry</option> 
                                                     <% } else { %>
                                                         <option value="fict">Fiction &amp; Poetry</option>   
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("bus")){ %>
+                                                    <% if (input8.equalsIgnoreCase("bus")) { %>
                                                         <option value="bus" selected>Business</option> 
                                                     <% } else { %>
                                                         <option value="bus">Business</option>      
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("comp")){ %>
+                                                    <% if (input8.equalsIgnoreCase("comp")) { %>
                                                         <option value="comp" selected>Computing &amp; IT</option> 
                                                     <% } else { %>
                                                         <option value="comp">Computing &amp; IT</option>  
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("edu")){ %>
+                                                    <% if (input8.equalsIgnoreCase("edu")) { %>
                                                         <option value="edu" selected>Education</option> 
                                                     <% } else { %>
                                                         <option value="edu">Education</option>   
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("child")){ %>
+                                                    <% if (input8.equalsIgnoreCase("child")) { %>
                                                         <option value="child" selected>Children's</option> 
                                                     <% } else { %>
                                                         <option value="child">Children's</option>  
@@ -462,37 +468,37 @@
                                             <% } else { %>
                                                 <!-- creating a drop down list; form-control-sm is used for narrower control -->
                                                 <select class="form-control form-control-sm" name="category" id="category" onchange="setCookie()">
-                                                    <% if (category.equalsIgnoreCase("all")){ %>
+                                                    <% if (category.equalsIgnoreCase("all")) { %>
                                                         <option value="all" selected>All Categories</option> <!-- options shown in the drop down list -->
                                                     <% } else { %>
                                                         <option value="all">All Categories</option>
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("fict")){ %>
+                                                    <% if (category.equalsIgnoreCase("fict")) { %>
                                                         <option value="fict" selected>Fiction &amp; Poetry</option> 
                                                     <% } else { %>
                                                         <option value="fict">Fiction &amp; Poetry</option>   
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("bus")){ %>
+                                                    <% if (category.equalsIgnoreCase("bus")) { %>
                                                         <option value="bus" selected>Business</option> 
                                                     <% } else { %>
                                                         <option value="bus">Business</option>      
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("comp")){ %>
+                                                    <% if (category.equalsIgnoreCase("comp")) { %>
                                                         <option value="comp" selected>Computing &amp; IT</option> 
                                                     <% } else { %>
                                                         <option value="comp" >Computing &amp; IT</option>  
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("edu")){ %>
+                                                    <% if (category.equalsIgnoreCase("edu")) { %>
                                                         <option value="edu" selected>Education</option> 
                                                     <% } else { %>
                                                         <option value="edu">Education</option>   
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("child")){ %>
+                                                    <% if (category.equalsIgnoreCase("child")) { %>
                                                         <option value="child" selected>Children's</option> 
                                                     <% } else { %>
                                                         <option value="child">Children's</option>  
@@ -505,38 +511,38 @@
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input8.equalsIgnoreCase("")) { %>
                                                 <!-- creating a drop down list; form-control-sm is used for narrower control -->
-                                                <select  class="form-control form-control-sm" disabled name="category" id="category" onchange="setCookie()">
+                                                <select  class="form-control form-control-sm" disabled name="category" id="category">
                                                     <% if (input8.equalsIgnoreCase("all")){ %>
                                                         <option value="all" selected>All Categories</option> <!-- options shown in the drop down list -->
                                                     <% } else { %>
                                                         <option value="all">All Categories</option>
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("fict")){ %>
+                                                    <% if (input8.equalsIgnoreCase("fict")) { %>
                                                         <option value="fict" selected>Fiction &amp; Poetry</option> 
                                                     <% } else { %>
                                                         <option value="fict">Fiction &amp; Poetry</option>   
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("bus")){ %>
+                                                    <% if (input8.equalsIgnoreCase("bus")) { %>
                                                         <option value="bus" selected>Business</option> 
                                                     <% } else { %>
                                                         <option value="bus">Business</option>      
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("comp")){ %>
+                                                    <% if (input8.equalsIgnoreCase("comp")) { %>
                                                         <option value="comp" selected>Computing &amp; IT</option> 
                                                     <% } else { %>
                                                         <option value="comp">Computing &amp; IT</option>  
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("edu")){ %>
+                                                    <% if (input8.equalsIgnoreCase("edu")) { %>
                                                         <option value="edu" selected>Education</option> 
                                                     <% } else { %>
                                                         <option value="edu">Education</option>   
                                                     <% } %>
 
-                                                    <% if (input8.equalsIgnoreCase("child")){ %>
+                                                    <% if (input8.equalsIgnoreCase("child")) { %>
                                                         <option value="child" selected>Children's</option> 
                                                     <% } else { %>
                                                         <option value="child">Children's</option>  
@@ -545,38 +551,38 @@
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
                                                 <!-- creating a drop down list; form-control-sm is used for narrower control -->
-                                                <select class="form-control form-control-sm" disabled name="category" id="category" onchange="setCookie()">
-                                                    <% if (category.equalsIgnoreCase("all")){ %>
+                                                <select class="form-control form-control-sm" disabled name="category" id="category">
+                                                    <% if (category.equalsIgnoreCase("all")) { %>
                                                         <option value="all" selected>All Categories</option> <!-- options shown in the drop down list -->
                                                     <% } else { %>
                                                         <option value="all">All Categories</option>
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("fict")){ %>
+                                                    <% if (category.equalsIgnoreCase("fict")) { %>
                                                         <option value="fict" selected>Fiction &amp; Poetry</option> 
                                                     <% } else { %>
                                                         <option value="fict">Fiction &amp; Poetry</option>   
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("bus")){ %>
+                                                    <% if (category.equalsIgnoreCase("bus")) { %>
                                                         <option value="bus" selected>Business</option> 
                                                     <% } else { %>
                                                         <option value="bus">Business</option>      
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("comp")){ %>
+                                                    <% if (category.equalsIgnoreCase("comp")) { %>
                                                         <option value="comp" selected>Computing &amp; IT</option> 
                                                     <% } else { %>
                                                         <option value="comp" >Computing &amp; IT</option>  
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("edu")){ %>
+                                                    <% if (category.equalsIgnoreCase("edu")) { %>
                                                         <option value="edu" selected>Education</option> 
                                                     <% } else { %>
                                                         <option value="edu">Education</option>   
                                                     <% } %>
 
-                                                    <% if (category.equalsIgnoreCase("child")){ %>
+                                                    <% if (category.equalsIgnoreCase("child")) { %>
                                                         <option value="child" selected>Children's</option> 
                                                     <% } else { %>
                                                         <option value="child">Children's</option>  
@@ -606,10 +612,10 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input9.equalsIgnoreCase("")) { %>
-                                                <textarea class="form-control" disabled name="descr" id="descr" rows="4" onchange="setCookie()"><%= input9 %></textarea>
+                                                <textarea class="form-control" disabled name="descr" id="descr" rows="4"><%= input9 %></textarea>
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <textarea class="form-control" disabled name="descr" id="descr" rows="4" onchange="setCookie()"><%= descr %></textarea>
+                                                <textarea class="form-control" disabled name="descr" id="descr" rows="4"><%= descr %></textarea>
                                             <% } %>
                                         <% 
                                            } 
@@ -633,10 +639,10 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input10.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="publisher" id="publisher" maxlength="40" onchange="setCookie()" value="<%= input10 %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="publisher" id="publisher" maxlength="40" value="<%= input10 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="publisher" id="publisher" maxlength="40" onchange="setCookie()" value="<%= publ_name %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="publisher" id="publisher" maxlength="40" value="<%= publ_name %>"> 
                                             <% } %>
                                         
                                         <% 
@@ -651,20 +657,20 @@
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input11.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "yrpublished", "is_yrpubl", "yrpubl_message", document.update_book.yrpublished)' value="<%= input11 %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "yrpublished", "is_yrpubl", "yrpubl_message", false, false)' value="<%= input11 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "yrpublished", "is_yrpubl", "yrpubl_message", document.update_book.yrpublished)' value="<%= publ_year %>"> 
+                                                <input type="text" class="form-control form-control-sm" name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("upd_del_book", "yrpublished", "is_yrpubl", "yrpubl_message", false, false)' value="<%= publ_year %>"> 
                                             <% } %>
                                         <%
                                            } else if (source.equals("Delete Book")) {
                                         %>
                                             <!-- if the user just did the subscribe show the value from the form before the subscribe -->
                                             <% if (!input11.equalsIgnoreCase("")) { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "yrpublished", "is_yrpubl", "yrpubl_message", document.update_book.yrpublished)' value="<%= input11 %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="yrpublished" id="yrpublished" maxlength="4" value="<%= input11 %>"> 
                                             <!-- otherwise read the record from the DB and show it -->
                                             <% } else { %>
-                                                <input type="text" class="form-control form-control-sm" disabled name="yrpublished" id="yrpublished" maxlength="4" onchange="setCookie()" onfocusout='isNumber("update_book", "yrpublished", "is_yrpubl", "yrpubl_message", document.update_book.yrpublished)' value="<%= publ_year %>"> 
+                                                <input type="text" class="form-control form-control-sm" disabled name="yrpublished" id="yrpublished" maxlength="4" value="<%= publ_year %>"> 
                                             <% } %>
                                         <% 
                                            } 
@@ -682,20 +688,17 @@
                                     
                                     <% if (source.equals("Update Book")) {
                                     %>
-                                        <!-- adding the Update button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                        <!-- adding the Update button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                         <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Update</button>
                                     <%
                                         } else if (source.equals("Delete Book")) {
                                     %>
-                                        <!-- adding the Delete button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                        <!-- adding the Delete button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                         <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Delete</button>
                                     <%
                                         }
                                     %>
-                                    <!-- adding a new container -->
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col"
+                                    
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">

@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * AddServlet.java : when the user clicks on the Submit button ( add_form.jsp ) this servlet is called
+ * AddServlet.java : when the user clicks on the Submit button (add_form.jsp) this servlet is called
  */
 package addservlet;
 
@@ -26,8 +26,7 @@ public class AddServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */ 
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -52,8 +51,7 @@ public class AddServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -66,9 +64,8 @@ public class AddServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String sTitle = "Add Book!"; // used for passing the title to the error_succ.jsp
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String sTitle = "Add Book"; // used for passing the title to the error_succ.jsp
         HttpSession hSession = request.getSession();
         
         String form_publ = request.getParameter("publisher"); // the text entered as the publisher
@@ -103,9 +100,9 @@ public class AddServlet extends HttpServlet {
         
         // depending on the value returned by the method addNewBook determine sTitle
         if ((sMessage.equals("ERR_ADD")) || (sMessage.equals("ERR_ADD_EXISTS"))) {
-            sTitle = "Error!"; // used for passing the title to the JSP
+            sTitle = "Error"; // used for passing the title to the JSP
         } else if (sMessage.equals("SUCC_ADD")) {
-            sTitle = "Add Book!"; // used for passing the title to the JSP
+            sTitle = "Add Book"; // used for passing the title to the JSP
         }
         
         hSession.setAttribute("source_name", "Add Book"); // on which page I am now

@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * LogOutServlet.java : when the user clicks on the Log Out link ( on the navbar ) this servlet is called
+ * LogOutServlet.java : when the user clicks on the Log Out link (on the navbar) this servlet is called
  */
 package logoutservlet;
 
@@ -55,7 +55,7 @@ public class LogOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession hSession = request.getSession(); // retrieve the session to which I am going to add variables
-        hSession.setAttribute("logged_in", "false" ); // set the session variable logged_in ( whether the user is logged in 
+        hSession.setAttribute("logged_in", "false" ); // set the session variable logged_in (whether the user is logged in) 
         hSession.setAttribute("emp_adm", "false"); // the user is not anymore using the website for employees and administrators
         hSession.setAttribute("user_type", "customer"); // the user type is now customer
         String sTitle = "Log Out"; // used for passing the title to the JSP script

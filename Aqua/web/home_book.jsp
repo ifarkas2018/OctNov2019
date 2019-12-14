@@ -1,9 +1,10 @@
 <%-- 
-    Document   : home_1_book
+    Document   : home_1_book is called when the user clicks on one of the books on the Home page
     Created on : 21-Sep-2019, 20:48:11
     Author     : Ingrid Farkas
-    called when the user clicks on one of the books on the Home page
+    Project    : Aqua Bookstore
 --%>
+
 <%@page import="java.sql.Connection"%>
 <%@page import="connection.ConnectionManager"%>
 <%@page import="java.sql.Statement"%>
@@ -56,7 +57,7 @@
                             <div class="col">
                                 &nbsp; &nbsp;
                                 <br/>
-                                <h3>Show Book</h3><br/>
+                                <h3 class="text-info">Show Book</h3><br/>
                                 <%
                                     HttpSession hSession = AquaMethods.returnSession(request);
                                     hSession.setAttribute("webpg_name", "home_book.jsp");
@@ -75,14 +76,15 @@
                                     <%
                                          // retrieve the book information and store it in result set rs
                                         ResultSet rs = retrieveBookDescr(index);
-                                        out.println("<br />");
+                                        // out.println("<br />");
 
                                         // after clicking on the button index.jsp is shown
                                         out.println("<form action=\"index.jsp\" method=\"post\">");
                                     
                                         if (!(rs.next())) { // there is no information for that book
-                                            out.println("<span class=\"red_text\">There is no information about that book!</span>");
-                                            out.println("</br></br>");
+                                            out.println("<br /><br /><br />");
+                                            out.println("<span class=\"text-warning\">There is no information about the book!</span>");
+                                            out.println("<br /><br /><br /><br /><br />");
                                         } else {
                                             // show the result in an unordered list
                                             out.print("<ul>");
@@ -116,9 +118,8 @@
                                                 
                                             out.print("</li>");
                                             out.print("</ul>");
-                                            out.print("<br />");
                                         }
-                                        
+                                        out.print("<br />");
                                         // adding the Search button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
                                         out.print("<button type=\"submit\" class=\"btn btn-info btn-sm\">Home</button>");
                                         out.println("</form>");
@@ -145,8 +146,13 @@
                 &nbsp; &nbsp;
             </div>
         </div> 
-          
+        
+        <!-- adding a new row; class whitebckgr is for setting the background to white -->
+        <div class="whitebckgr">
+            <div class="col">
+                &nbsp; &nbsp;
+            </div>
+        </div>  
         <%@ include file="footer.jsp"%>
     </body>
 </html>
-

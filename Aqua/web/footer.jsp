@@ -2,6 +2,7 @@
     Document   : footer
     Created on : 02-Sep-2018, 01:51:27
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- footer.jsp builds the footer of the web page --> 
@@ -13,7 +14,7 @@
         
         <script>
             
-            // isEmail : returns true if the email address is valid ( otherwise it returns false )
+            // isEmail: returns true if the email address is valid (otherwise it returns false)
             function isEmail(email) {
                 // regex pattern is used for validating email 
                 var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -40,7 +41,7 @@
     </head>
     <body> 
         <footer>
-            <!-- footer is a class ( in templatecss.css ) defining the style of this div element -->
+            <!-- footer is a class (in templatecss.css) defining the style of this div element -->
             <div class="footer" align="center" id="footer">
                 <div class="container"> 
                     <div class="row"> 
@@ -79,7 +80,7 @@
                                 <li> 
                                     <div class="container"> 
                                         <!-- after clicking on the button the SubscrServl servlet is called -->
-                                        <form action="SubscrServl" method="post"> <!-- action="SubscrServl" method="post" -->
+                                        <form action="SubscrServl" method="post"> 
                                             <div class="row"> <!-- adding a new row the grid -->
                                                 <div class="col">
                                                     <!-- input element used for entering the email; form-control-sm is used for smaller size of the input element -->

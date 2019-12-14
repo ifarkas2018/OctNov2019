@@ -2,9 +2,10 @@
     Document   : update_prev
     Created on : 14-Mar-2019, 04:56:04
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- update_prev.jsp - when the user clicks on the Update Book ( the navigation bar ) this web page is shown -->
+<!-- update_prev.jsp - when the user clicks on the Update Book (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

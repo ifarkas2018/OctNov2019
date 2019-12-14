@@ -2,6 +2,7 @@
     templatecss.css : colors, CSS rules used in the the navbar and footer, font size and the color of the text
     Created on : 17-Sep-2018, 09:37:30
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 */
 
 
@@ -14,10 +15,10 @@
     color: #fff;
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #DDDDDD;
-    background: -webkit-linear-gradient( to right, rgb( 180, 180, 180 ), rgb( 162, 166, 168 ));
+    background: -webkit-linear-gradient(to right, rgb(180, 180, 180), rgb(162, 166, 168));
     font-weight: 600;
     font-weight: 600;
-    background: linear-gradient( to right, rgb( 126, 146, 137 ), rgb( 133, 148, 141 )); 
+    background: linear-gradient(to right, rgb(126, 146, 137), rgb(133, 148, 141)); 
 }
 
 /* style for the h3 in the footer */
@@ -40,7 +41,7 @@
     color: #7F8C8D;
 }
 
-/* styles for the links ( in the list ) in the footer */
+/* styles for the links (in the list) in the footer */
 .footer ul li a {
     padding: 0 0 5px 0;
     display: block;
@@ -53,25 +54,25 @@
 
 /* the background color on the navbar */
 .navbar {
-    background-color: rgb( 180, 187, 184 ) !important;
+    background-color: rgb(180, 187, 184) !important;
 } 
 
- /* the color of the brand ( on the navbar ) */
+ /* the color of the brand (on the navbar) */
 .navbar .navbar-brand {
     color: white;
 }
 
-/* the color on hover of the brand ( on the navbar ) */
+/* the color on hover of the brand (on the navbar) */
 .navbar .navbar-brand:hover {
     color: black;
 }
 
-/* white color of the link ( on the navbar ) */
+/* white color of the link (on the navbar) */
 .navbar .nav-link {
     color: white !important;
 }
 
-/* the color on hover of the brand ( on the navbar ) */
+/* the color on hover of the brand (on the navbar) */
 .navbar .nav-link:hover {
     color: black !important;
 }

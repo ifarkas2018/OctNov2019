@@ -1,8 +1,8 @@
 <%-- 
-    Document   : searchDB.jsp
+    Document   : searchDB.jsp called from search_form.jsp
     Created on : 18-Sep-2018, 00:54:05
     Author     : Ingrid Farkas
-    called from search_form.jsp
+    Project    : Aqua Bookstore
 --%>
 
 <%@page import="java.sql.ResultSet"%>
@@ -25,6 +25,18 @@
     </head>
     
     <body>
+        <%!
+            // cont_wildcard returns true if the string contains one of wildcards % or _. Otherwise it returns false.
+            boolean cont_wildcard(String str) {
+            CharSequence undersc = "_";
+            CharSequence percentage = "%";
+            // does the string contain _ or %
+            if ((str.contains(undersc)) || (str.contains(percentage)))
+                return true;
+            else
+                return false;
+            }
+        %>
         <div class="whitebckgr">
             <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                 <div class="col-lg-6 col-md-6"> 
@@ -40,25 +52,13 @@
                             <div class="col">
                                 &nbsp; &nbsp;
                                 <br/>
-                                <h3>Search</h3><br/>
-                                
-                                <%!
-                                    // cont_wildcard returns true if the string contains one of wildcards % or _. Otherwise it returns false.
-                                    boolean cont_wildcard(String str) {
-                                        CharSequence undersc = "_";
-                                        CharSequence percentage = "%";
-                                        // does the string contain _ or %
-                                        if ((str.contains(undersc)) || (str.contains(percentage)))
-                                            return true;
-                                        else
-                                            return false;
-                                    }
-                                %>
+                                <h3 class="text-info">Search</h3><br/>
                                 
                                 <%
+                                    boolean booksReturned = false; // are there books returned as the result of the Search
                                     boolean subscr = false; // whether the user is coming from the subscribe
                                     HttpSession hSession = AquaMethods.returnSession(request);
-                                    // sess. var. is set to true in the subscrres_content.jsp ( if the user subscribed )
+                                    // sess. var. is set to true in the subscrres_content.jsp (if the user subscribed)
                                     if (AquaMethods.sessVarExists(hSession, "subscribe")) {
                                         // name of the page loaded before this page
                                         subscr = Boolean.valueOf(String.valueOf(hSession.getAttribute("subscribe")));
@@ -76,15 +76,15 @@
                                         String form_publyear = ""; 
                                 
                                         if (subscr) { // the user just subscribed - I need to read the values from the forms
-                                            form_title = AquaMethods.readSetSessV(hSession, "input0"); // read and reset the sess. var. ( title )
-                                            form_auth = AquaMethods.readSetSessV(hSession, "input1"); // read and reset the sess. var. ( auth )
-                                            form_isbn = AquaMethods.readSetSessV(hSession, "input2"); // read and reset the sess. var. ( isbn )
-                                            form_price = AquaMethods.readSetSessV(hSession, "input3"); // read and reset the sess. var. ( price )
-                                            form_sortby = AquaMethods.readSetSessV(hSession, "input4"); // read and reset the sess. var. ( sortby )
-                                            form_categ = AquaMethods.readSetSessV(hSession, "input5"); // read and reset the sess. var. ( categ )             
-                                            form_publyear = AquaMethods.readSetSessV(hSession, "input6"); // read and reset the sess. var. ( publyear )
+                                            form_title = AquaMethods.readSetSessV(hSession, "input0"); // read and reset the sess. var. (title)
+                                            form_auth = AquaMethods.readSetSessV(hSession, "input1"); // read and reset the sess. var. (auth)
+                                            form_isbn = AquaMethods.readSetSessV(hSession, "input2"); // read and reset the sess. var. (isbn)
+                                            form_price = AquaMethods.readSetSessV(hSession, "input3"); // read and reset the sess. var. (price)
+                                            form_sortby = AquaMethods.readSetSessV(hSession, "input4"); // read and reset the sess. var. (sortby)
+                                            form_categ = AquaMethods.readSetSessV(hSession, "input5"); // read and reset the sess. var. (categ)             
+                                            form_publyear = AquaMethods.readSetSessV(hSession, "input6"); // read and reset the sess. var. (publyear)
 
-                                            // sets all the sess. var. ( with names that start with input ) to ""
+                                            // sets all the sess. var. (with names that start with input) to ""
                                             AquaMethods.setToEmptyInput(hSession);
                                         }
                                     
@@ -97,7 +97,7 @@
                                             form_price = request.getParameter("price_range"); // the option chosen in the drop-down list - price range
                                             form_publyear = request.getParameter("publ_year"); // the text entered as the publ_year
                                     
-                                            // sets all the sess. var. ( with names that start with input ) to ""
+                                            // sets all the sess. var. (with names that start with input) to ""
                                             AquaMethods.setToEmptyInput(hSession);
                                         }
                                     
@@ -200,15 +200,17 @@
                                     
                                         // execute the query - the result will be in the rs
                                         ResultSet rs = stmt.executeQuery(sQuery); 
-                                        out.println("<br />");
+                                        // @@@@@@@@@@@@@ out.println("<br />");
 
                                         // after clicking on the button search_page.jsp is shown
                                         out.println("<form action=\"search_page.jsp\" method=\"post\">");
                                     
                                         if (!(rs.next())) { // there are no books that meet the search criteria
-                                            out.println("<span class=\"red_text\">There are no books that meet the search criteria!</span>");
-                                            out.println("</br></br>");
+                                            out.println("<br /><br /><br />");
+                                            out.println("There are <span class=\"text-warning\"> no books </span> that meet the search criteria!");
+                                            out.println("<br /><br /><br /><br /><br />");
                                         } else {
+                                            booksReturned = true;
                                             out.println("The following books meet the search criteria: ");
                                             out.println("<br /><br />");
                                             // show the result in an unordered list
@@ -225,7 +227,7 @@
                                                 String sISBN = rs.getString("isbn");
                                                 // show the value for the title, author and price
                                                 String descr = rs.getString("descr");
-                                                out.print("<li><b>" + sTitle + "</b> by ( author ) " + sAuthor ); 
+                                                out.print("<li><b>" + sTitle + "</b> by (author) " + sAuthor ); 
                                                 // if there is value for the price : show it
                                                 if (sPrice != null){
                                                     out.print(" ( <b>price: </b>" + sPrice + " GBP )");
@@ -233,13 +235,13 @@
                                                 
                                                 // if there is an ISBN : show it
                                                 if (sISBN != null) {
-                                                    out.print("<br />");
+                                                    // @@@@@@@@@@@@@ out.print("<br />");
                                                     out.print("<br /><b>" + "ISBN: </b>" + sISBN );
                                                 }
                                                 
                                                 // if there is a book description : show it
                                                 if (descr != null) {
-                                                    out.print("<br />");
+                                                    // @@@@@@@@@@@@@ out.print("<br />");
                                                     out.print("<br /><b>" + "Description: </b>" + descr );
                                                 }
                                                 
@@ -249,7 +251,7 @@
                                             out.print("</ul>");
                                         }
                                         out.print("<br />");
-                                        // adding the Search button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                        // adding the Search button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                         out.print("<button type=\"submit\" class=\"btn btn-info btn-sm\">Search</button>");
                                         out.println("</form>");
                                     } catch(Exception e) {
@@ -268,7 +270,20 @@
                 </div> <!-- end of class="col-lg-5 col-md-5" -->
             </div> <!-- end of class="row" -->
         </div> <!-- end of class="whitebckgr" -->
-            
+         
+        <% if (booksReturned) { // if there were books returned as the result of the search query
+        %>
+        
+            <div class="whitebckgr">
+                <div class="col">
+                    &nbsp; &nbsp;
+                </div>
+            </div> 
+    
+        <%
+           }
+        %>
+        
         <!-- adding a new row; class whitebckgr is for setting the background to white -->
         <div class="whitebckgr">
             <div class="col">

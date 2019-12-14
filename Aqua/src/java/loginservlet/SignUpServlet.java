@@ -69,7 +69,7 @@ public class SignUpServlet extends HttpServlet {
             throws ServletException, IOException {
         
         try{	    
-            // read the text from the username, passw, first_name, last_name, admin ( the login_form.jsp ) 
+            // read the text from the username, passw, first_name, last_name, admin (the login_form.jsp) 
             String userName = request.getParameter("username"); 
             String password = request.getParameter("passw1");
             String first_name = request.getParameter("first_name");
@@ -93,35 +93,35 @@ public class SignUpServlet extends HttpServlet {
             // method userExists returns TRUE if the user with the entered username and password already exists in the DB, otherwise returns FALSE
             boolean userExists = UserDAO.userExists(userName, password); 
             if (userExists){ 
-                // setting the hSession ( to pass them to the page error_succ.jsp ) and loading the page error_succ.jsp
+                // setting the hSession (to pass them to the page error_succ.jsp) and loading the page error_succ.jsp
                 String sTitle = "Sign Up"; // used for passing the title to the JSP
                 String sMessage = "ERR_USER_EXISTS"; // used for passing the message to the JSP	 
                 hSession.setAttribute("source_name", "Sign Up"); // on which page I am now
                 hSession.setAttribute("message", sMessage); // setting the attribute message to the value of the sMessage
                 hSession.setAttribute("title", sTitle); // setting the attribute title to the value of the sTitle
-                hSession.setAttribute("sign_up", "false" ); // set the session variable sign_up ( the user finished signing up )
+                hSession.setAttribute("sign_up", "false" ); // set the session variable sign_up (the user finished signing up)
                 response.sendRedirect("error_succ.jsp"); // show the page with the message the new user signed up successfully 
             } else { // the username and password doesn't exist
                 // method signup returns TRUE if the new user was successfully added to the table login, otherwise it returns FALSE
                 boolean result = UserDAO.signUp(userName, password, name, admin);
 
                 if (result){ // the new user was added to the database successfully 
-                    // setting the hSession ( to pass them to the page error_succ.jsp ) and loading the page error_succ.jsp
+                    // setting the hSession (to pass them to the page error_succ.jsp) and loading the page error_succ.jsp
                     String sTitle = "Sign Up"; // used for passing the title to the JSP
                     String sMessage = "SUCC_SIGN_UP"; // used for passing the message to the JSP	 
                     hSession.setAttribute("source_name", "Sign Up"); // on which page I am now
                     hSession.setAttribute("message", sMessage); // setting the attribute message to the value of the sMessage
                     hSession.setAttribute("title", sTitle); // setting the attribute title to the value of the sTitle
-                    hSession.setAttribute("sign_up", "false" ); // set the session variable sign_up ( the user finished signing up )
+                    hSession.setAttribute("sign_up", "false" ); // set the session variable sign_up (the user finished signing up)
                     response.sendRedirect("error_succ.jsp"); // show the page with the message the new user signed up successfully 
                 } else { // the new user was not added to the database successfully 
-                    // setting the hSession ( to pass them to the page error_succ.jsp ) and loading the page error_succ.jsp
+                    // setting the hSession (to pass them to the page error_succ.jsp) and loading the page error_succ.jsp
                     String sTitle = "Sign Up"; // used for passing the title to the JSP
                     String sMessage = "ERR_SIGN_UP"; // used for passing the message to the JSP	 
                     hSession.setAttribute("source_name", "Sign Up"); // on which page I am now
                     hSession.setAttribute("message", sMessage); // setting the attribute message to the value of the sMessage
                     hSession.setAttribute("title", sTitle); // setting the attribute title to the value of the sTitle
-                    hSession.setAttribute("sign_up", "false" ); // set the session variable sign_up (the user wasn't signed up )
+                    hSession.setAttribute("sign_up", "false"); // set the session variable sign_up (the user wasn't signed up )
                     response.sendRedirect("error_succ.jsp"); // show the page with the message the new user signed up successfully 
                 }
             }

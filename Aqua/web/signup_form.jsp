@@ -1,7 +1,8 @@
 <%-- 
-    Document   : signup_form ( included in signup_page.jsp )
+    Document   : signup_form (included in signup_page.jsp)
     Created on : 06-Apr-2019, 00:14:14
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- signup_form.jsp - shows the form for entering the username, password, first name, last name, whether the user is an administrator  -->
@@ -20,7 +21,7 @@
             INPUT_FIELDS = 12; // number of the max umber of input fields (on all forms) 
             EQUAL_PASSW = 'true'; // are the entered passwords the same
            
-            // matchPass: compares the two entered passwords and sets the variable EQUAL_PASSW ( whether the entered passwords are equal )
+            // matchPass: compares the two entered passwords and sets the variable EQUAL_PASSW (whether the entered passwords are equal)
             function matchPass(){  
                 var passwd1 = document.signup.passw1.value;  
                 var passwd2 = document.signup.passw2.value;  
@@ -38,7 +39,7 @@
                 }  
             }  
            
-            // setCookie: creates cookie inputI = value in the input field ; ( I - number 0..5 )
+            // setCookie: creates cookie inputI = value in the input field ; (I - number 0..5)
             function setCookie() {           
                 var i;
                 var inp_names = new Array('username', 'first_name', 'last_name', 'adm_yes', 'adm_no'); // names of the input fields
@@ -46,11 +47,11 @@
                 // for the radio buttons set the cookie to the default
                 document.cookie = "input3" + "=;";
                 document.cookie = "input4" + "=;";
-                for ( i = 0; i < NUM_FIELDS; i++ ) {
-                    if ((i==0) || (i==1) || (i==2)){
+                for (i = 0; i < NUM_FIELDS; i++) {
+                    if ((i==0) || (i==1) || (i==2)) {
                         document.cookie = "input" + i + "=" + document.getElementById(inp_names[i]).value + ";"; // creating a cookie
                         
-                    } else if ((i==3) || (i==4)){
+                    } else if ((i==3) || (i==4)) {
                         if (document.getElementById(inp_names[i]).checked){
                             document.cookie = "input" + i + "=" + document.getElementById(inp_names[i]).value + ";"; // creating a cookie
                         }
@@ -75,11 +76,11 @@
                 return "";
             }
             
-            // setDefaults : sets the values of the cookies ( input0, input1, input12 ) to the default and
+            // setDefaults : sets the values of the cookies (input0, input1, input12) to the default and
             // writes the content of every input field to the cookie
             function setDefaults() {   
                 var i;
-                for ( i = 0; i < INPUT_FIELDS; i++ ) {
+                for (i = 0; i < INPUT_FIELDS; i++) {
                     cValue = getCookie("fill_in");
                     if ((i===0) && (cValue==="false" )){ // if it doesn't need to be filled in set the radio buttons to the default
                         document.getElementById("adm_yes").checked = true; // default setting for the checked Yes 
@@ -123,7 +124,7 @@
                             <div class="col">
                                 &nbsp; &nbsp;
                                 <br/>
-                                <h3>Sign Up</h3> <!-- title on the web page -->
+                                <h3 class="text-info">Sign Up</h3> <!-- title on the web page -->
                                 <br/> 
                                 <%  
                                     HttpSession hSession2 = AquaMethods.returnSession(request);
@@ -136,7 +137,7 @@
                                     
                                     // IDEA : fill_in variable is set in SubscrServl.java - true if some of the input session variables were set,
                                     // and they need to be added to the form here - this true if the user BEFORE LOADED THIS PAGE and after that he entered
-                                    // the email to subscribe ( in the footer ) and on the next page he clicked on Close
+                                    // the email to subscribe (in the footer) and on the next page he clicked on Close
                                     if (AquaMethods.sessVarExists(hSession2, "fill_in")) { 
                                         String fill_in = String.valueOf(hSession2.getAttribute("fill_in")); 
                                         // session variable page_name is set below. It is used if the user clicks on the Subscribe button and after that on
@@ -202,14 +203,14 @@
                                     <!-- creating the input element for the first name -->
                                     <div class="form-group">
                                         <label for="first_name">First Name</label> <!-- first name label -->
-                                        <input type="text" class="form-control form-control-sm" name="first_name" id="first_name" maxlength="15" onfocusout="setCookie();valLetters(document.signup.first_name, fname_message, 'false');" value="<%= input1 %>"> 
+                                        <input type="text" class="form-control form-control-sm" name="first_name" id="first_name" maxlength="15" onfocusout="setCookie();valLetters(document.signup.first_name, fname_message, false, 'false');" value="<%= input1 %>"> 
                                         <span id="fname_message" class="text_color"></span>
                                     </div>
 
                                     <!-- creating the input element for the last name -->
                                     <div class="form-group">
                                         <label for="last_name">Last Name</label> <!-- last name label -->
-                                        <input type="text" class="form-control form-control-sm" name="last_name" id="last_name"  maxlength="15" onfocusout="setCookie();valLetters(document.signup.last_name, lname_message, 'false');" value="<%= input2 %>"> 
+                                        <input type="text" class="form-control form-control-sm" name="last_name" id="last_name"  maxlength="15" onfocusout="setCookie();valLetters(document.signup.last_name, lname_message, false, 'false');" value="<%= input2 %>"> 
                                         <span id="lname_message" class="text_color"></span>
                                     </div>
                                     
@@ -247,8 +248,9 @@
                                         </div>    
                                     </div>
                                         
-                                    <!-- adding the Submit button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                    <!-- adding the Submit button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                     <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">Submit</button>
+                                    
                                     <!-- adding a new container -->
                                     <div class="container">
                                         <div class="row">
@@ -257,15 +259,6 @@
                                             </div>
                                         </div>    
                                     </div>
-
-                                    <!-- adding a new container -->
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col">
-                                                &nbsp; &nbsp; <!-- adding some empty space -->
-                                            </div>
-                                        </div>    
-                                    </div> 
                                 </form>  
                             </div> <!-- end of class="col" -->
                         </div> <!-- end of class="row" --> 

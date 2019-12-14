@@ -2,6 +2,7 @@
     Document   : search_form.jsp
     Created on : 18-Sep-2018, 01:33:11
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- search_form.jsp - the form on the page Search Book -->
@@ -21,25 +22,30 @@
             NUM_FIELDS = 7; // number of the input fields on the form
             INPUT_FIELDS = 12;  
         
-            // setCookie: creates cookie inputI = value in the input field ; ( I - number 0..2 )
+            // setCookie: creates cookie inputI = value in the input field ; (I - number 0..2)
             function setCookie() {           
                 var i;
                 var inp_names = new Array('title', 'author', 'isbn', 'price_range', 'sortby', 'categ', 'publ_year'); // names of the input fields
                 
-                for ( i = 0; i < NUM_FIELDS; i++ ) {
+                for (i = 0; i < NUM_FIELDS; i++) {
                     document.cookie = "input" + i + "=" + document.getElementById(inp_names[i]).value + ";"; // creating a cookie
                 } 
             }
             
-            // setDefaults : sets the values of the cookies ( input0, input1, input12 ) to the default and
+            // setDefaults : sets the values of the cookies (input0, input1, input12) to the default and
             // writes the content of every input field to the cookie
             function setDefaults() {   
                 var i;
-                for ( i = 0; i < INPUT_FIELDS; i++ ) {
+                for (i = 0; i < INPUT_FIELDS; i++) {
                     document.cookie = "input" + i + "= "; // setting the VALUE of the cookie to EMPTY
                 }
                 setCookie(); // go through every input field and write its content to the cookie
             } 
+            
+            // on the load show the modal (id: centeredModal)
+            $(window).on('load',function(){
+                $('#centeredModal').modal('show');
+            });
         </script>    
     </head>
     
@@ -63,6 +69,10 @@
                     <div> <!-- horizontally centering the picture using center-image, img-fluid is for responsive image -->
                         <img src="images/books.png" class="img-fluid center-image" alt="picture of books" title="picture of books"> 
                     </div>
+                    <br /><br />
+                    <div> <!-- horizontally centering the picture using center-image, img-fluid is for responsive image -->
+                        <img src="images/books.png" class="img-fluid center-image" alt="picture of books" title="picture of books"> 
+                    </div>
                 </div>
                        
                 <!-- the Bootstrap column takes 5 columns on the large desktops and 5 columns on the medium sized desktops -->
@@ -72,7 +82,7 @@
                             <div class="col"> <!-- adding a new column to the Bootstrap grid -->
                                 &nbsp; &nbsp;
                                 <br/>
-                                <h3>Search</h3>
+                                <h3 class="text-info">Search</h3>
                                 <br/> 
                                 Wildcards:  
                                 <!-- adding an unordered list with two list items -->
@@ -93,7 +103,7 @@
                                     
                                     // IDEA : fill_in variable is set in SubscrServl.java - true if some of the input session variables were set,
                                     // and they need to be added to the form here - this is true if the user BEFORE LOADED THIS PAGE and after that he entered
-                                    // the email to subscribe ( in the footer ) and on the next page he clicked on Close
+                                    // the email to subscribe (in the footer) and on the next page he clicked on Close
                                     if (AquaMethods.sessVarExists(hSession2, "fill_in")) { 
                                         String fill_in = String.valueOf(hSession2.getAttribute("fill_in")); 
                                         // session variable page_name is set below. It is used if the user clicks on the Subscribe button and after that on
@@ -102,7 +112,7 @@
                                             String page_name = String.valueOf(hSession2.getAttribute("page_name"));
                                             // if the user clicked on the Close button on the page subscrres_content and this page was shown before (page_name)
                                             // and if something is stored in session variables input 
-                                            // then retrieve the session variable input0 ( to show it in the 1st input field 
+                                            // then retrieve the session variable input0 (to show it in the 1st input field) 
                                             if ((page_name.equalsIgnoreCase(PAGE_NAME)) && (fill_in.equalsIgnoreCase("true"))) {
                                                 if (AquaMethods.sessVarExists(hSession2, "input0")) {
                                                     input0 = String.valueOf(hSession2.getAttribute("input0")); // the value that was in the 1st input field
@@ -145,13 +155,13 @@
                                     </div>
                                     <div class="form-group"> 
                                         <label for="author">Author's Name</label> <!-- author's name label -->
-                                        <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.search_book.author, author_message, 'false');" value="<%= input1 %>"> <!-- the input element for author -->
+                                        <input type="text" class="form-control form-control-sm" name="author" id="author" maxlength="70" onchange="setCookie()" onfocusout="valLetters(document.search_book.author, author_message, true, 'false');" value="<%= input1 %>"> <!-- the input element for author -->
                                         <span id="author_message" class="text_color"></span>
                                     </div>
                 
                                     <div class="form-group">
                                         <label for="isbn">ISBN</label> <!-- ISBN label -->
-                                        <input type="text" class="form-control form-control-sm" name="isbn" id="isbn" maxlength="13" onchange="setCookie();" onfocusout='isNumber("search_book", "isbn", "is_isbn", "isbn_message", document.search_book.isbn)' value="<%= input2 %>"> <!-- the input element for ISBN -->
+                                        <input type="text" class="form-control form-control-sm" name="isbn" id="isbn" maxlength="13" onchange="setCookie();" onfocusout='isNumber("search_book", "isbn", "is_isbn", "isbn_message", true, false)' value="<%= input2 %>"> <!-- the input element for ISBN -->
                                         <span id="isbn_message" class="text_color"></span>
                                     </div>
                 
@@ -209,15 +219,15 @@
                                         <!-- creating a drop down list; form-control-sm is used for smaller control -->
                                         <select class="form-control form-control-sm" name="sortby" id="sortby" onchange="setCookie()"> 
                                             <% if (input4.equalsIgnoreCase("low")){ %>
-                                                 <option value="low" selected>Price ( Low - High )</option> <!-- options shown in the drop down list -->
+                                                 <option value="low" selected>Price (Low - High)</option> <!-- options shown in the drop down list -->
                                             <% } else { %>
-                                                 <option value="low">Price ( Low - High )</option>
+                                                 <option value="low">Price (Low - High)</option>
                                             <% } %>
                                             
                                             <% if (input4.equalsIgnoreCase("high")){ %>
-                                                 <option value="high" selected>Price ( High - Low )</option> <!-- options shown in the drop down list -->
+                                                 <option value="high" selected>Price (High - Low)</option> <!-- options shown in the drop down list -->
                                             <% } else { %>
-                                                 <option value="high">Price ( High - Low )</option>
+                                                 <option value="high">Price (High - Low)</option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -266,7 +276,7 @@
                                         
                                     <div class="form-group">
                                         <label for="publ_year">Publication Year</label> <!-- publication year label -->
-                                        <input type="text" class="form-control form-control-sm" id="publ_year" name="publ_year" maxlength="4" onchange="setCookie()" onfocusout='isNumber( "search_book", "publ_year", "is_yrpubl", "year_message", document.search_book.publ_year )' value="<%= input6 %>"> <!-- the input element for the publication year -->
+                                        <input type="text" class="form-control form-control-sm" id="publ_year" name="publ_year" maxlength="4" onchange="setCookie()" onfocusout='isNumber("search_book", "publ_year", "is_yrpubl", "year_message", true, false)' value="<%= input6 %>"> <!-- the input element for the publication year -->
                                         <span id="year_message" class="text_color"></span>
                                     </div>
 
@@ -278,7 +288,7 @@
                                         </div>    
                                     </div>
 
-                                    <!-- adding the Search button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                    <!-- adding the Search button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                     <button type="submit" class="btn btn-info btn-sm">Search</button>
 
                                     <!-- adding a new container -->
@@ -303,5 +313,36 @@
                 &nbsp; &nbsp;
             </div>
         </div> 
+        
+        <%
+            // if the emp_adm session attribute exists retrieve it
+            if (AquaMethods.sessVarExists( hSession2, "emp_adm")) {
+                String empadmS = (String)(hSession2.getAttribute("emp_adm"));
+                Boolean emp = Boolean.valueOf(empadmS); 
+                if (emp != true) { // show the modal if the user is loading the web site for the regular user
+        %>
+                    <!-- bootstrap modal -->
+                    <div class="modal fade" id="centeredModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Aqua Bookstore</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ********************/AquaBookstore/Aqua is the web site for employees and administrators
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <%
+                }
+            }
+        %>
     </body>
 </html>

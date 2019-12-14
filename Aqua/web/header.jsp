@@ -2,6 +2,7 @@
     Document   : header
     Created on : 29-Mar-2019, 22:46:27
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <%@page import="java.util.Enumeration"%>
@@ -49,7 +50,7 @@
         </script>
     </head>
 
-    <body class="greybckgr"> <!-- greybckgr - class which defines grey background ( templatecss.css ) -->
+    <body class="greybckgr"> <!-- greybckgr - class which defines grey background (templatecss.css) -->
         <div class="container">
             <div class="whitebckgr"> <!-- new row - white background -->
             <div class="whitebckgr"> 
@@ -67,7 +68,7 @@
                     <!-- the Bootstrap column takes 4 columns on the large screens, 4 columns on the medium sized screens -->
                     <div class="col-lg-4 col-md-4"> 
                         &nbsp;  
-                        <!-- image that is the logo of the Aqua; alt - the text that is shown if the image can't be loaded ( alternate text )
+                        <!-- image that is the logo of the Aqua; alt - the text that is shown if the image can't be loaded (alternate text)
                              title - the text that is shown when the user points at the image -->
                         <img class="img-logo" src="images/bookshelf.png" alt="Aqua log" title="Aqua Logo">  
                                     
@@ -89,23 +90,23 @@
             </div>
             
             <%
-                String emp_adm = ""; // is the user using the website for employees and administrators ( and not for customers ) 
+                String emp_adm = ""; // is the user using the website for employees and administrators (and not for customers) 
                 String logged_in = ""; // is the user logged in
-                String userType = ""; // type of the user: admin, emp, customer ( the possible values )
+                String userType = ""; // type of the user: admin, emp, customer (the possible values)
                 String attrName = ""; // variable name in the session
                 boolean attr_found = false; // is the emp_adm one of variables in the session
                 
                 HttpSession hSession1 = AquaMethods.returnSession(request);
                 
                 // sessVarExists: returns whether the session var. user_type exists in the session
-                // user_type: admin, emp, customer ( the possible values ) ( exists after the user tried to log in )
+                // user_type: admin, emp, customer (the possible values) (exists after the user tried to log in)
                 attr_found = AquaMethods.sessVarExists(hSession1, "user_type"); 
                 if (attr_found) // if the attribute named user_type was found
-                    userType = String.valueOf(hSession1.getAttribute("user_type")); // admin, emp, customer ( the possible values )
+                    userType = String.valueOf(hSession1.getAttribute("user_type")); // admin, emp, customer (the possible values)
                 
                 String URL_String = (request.getRequestURL()).toString(); // the URL of the website loaded before this one
                 
-                // is the user using using the website for employees and administrators ( and not for customers ) 
+                // is the user using using the website for employees and administrators (and not for customers) 
                 attr_found = AquaMethods.sessVarExists(hSession1, "emp_adm"); // sessVarExists: returns whether the session var. emp_adm exists in the session
                 if (attr_found) // if the attribute named emp_adm was found
                     emp_adm = String.valueOf(hSession1.getAttribute("emp_adm")); // read the value of  the attribute
@@ -113,16 +114,16 @@
                 if (emp_adm.equals("")) { // if the attribute named emp_adm was not found
                     if (URL_String.contains(URL_EMP_ADM)) { // if the user is using the website for employees or administrators
                         emp_adm = "true";
-                        hSession1.setAttribute("emp_adm1", emp_adm); // add the attribute to the session ( value : true )
+                        hSession1.setAttribute("emp_adm1", emp_adm); // add the attribute to the session (value : true)
                         
-                    } else if (URL_String.contains(URL_CUST)) { // if the user is using the website for customers // AquaBookstore @@@@@@@@@@@@@@@@
+                    } else if (URL_String.contains(URL_CUST)) { // if the user is using the website for customers 
                         emp_adm = "false";
                         hSession1.setAttribute("emp_adm", emp_adm); // add the attribute to the session ( value : false )
                     }
                 }
                 
                 // sessVarExists: returns whether the session var. logged_in exists in the session
-                // logged_in is TRUE if the user is logged in ( as employee or as administrator ) 
+                // logged_in is TRUE if the user is logged in (as employee or as administrator) 
                 attr_found = AquaMethods.sessVarExists(hSession1, "logged_in"); 
                 if (attr_found) // if the attribute named logged_in was found
                     logged_in = String.valueOf(hSession1.getAttribute("logged_in")); // read the value of  the attribute
@@ -213,7 +214,7 @@
                                             <a class="nav-link" href="LogOutServlet">Log Out</a>
                                         </li>                               
                                 <%
-                                    // if the user is logged in as administrator ("admin") or employee ("emp") or the user accessed the website for 
+                                    // if the user is logged in as administrator("admin") or employee("emp") or the user accessed the website for 
                                     // employees or administrators
                                     } else if ((userType.equals("admin")) || (userType.equals("emp")) || (emp_adm.equals("true"))) {
                                 %>    

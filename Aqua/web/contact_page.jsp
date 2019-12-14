@@ -2,9 +2,10 @@
     Document   : contact_page
     Created on : 10-Apr-2019, 19:45:25
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- contact_page.jsp - when the user clicks on the Contact link ( the navigation bar ) this web page is shown -->
+<!-- contact_page.jsp - when the user clicks on the Contact link (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

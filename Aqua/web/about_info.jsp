@@ -2,6 +2,7 @@
     Document   : about_info
     Created on : 12-May-2019, 05:30:48
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <%@page contentType = "text/html" pageEncoding = "UTF-8"%>
@@ -14,7 +15,7 @@
     </head>
     <body>
         <%
-            HttpSession hSession = AquaMethods.returnSession( request );
+            HttpSession hSession = AquaMethods.returnSession(request);
             hSession.setAttribute("webpg_name", "about_page.jsp");
             // reseting the sess. var to the default: if the user just did do the subscribe, the form on the NEXT web page DOESN'T NEED 
             // to show the previous values 

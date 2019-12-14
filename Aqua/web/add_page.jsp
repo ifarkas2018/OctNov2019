@@ -2,9 +2,10 @@
     Document   : add_page
     Created on : 08-Nov-2018, 13:08:01
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
-<!-- add_page.jsp - when the user clicks on the Add button ( the navigation bar ) this web page is shown -->
+<!-- add_page.jsp - when the user clicks on the Add button (the navigation bar) this web page is shown -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

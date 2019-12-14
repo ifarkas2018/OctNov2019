@@ -2,6 +2,7 @@
     Document   : error_succ.jsp
     Created on : 19-Nov-2018, 02:31:59
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- error_succ.jsp adds the error or success message to the web page -->
@@ -12,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%
             HttpSession hSession = AquaMethods.returnSession(request);
-            // the name of the page to return to if the user enters the email ( subscribe ) 
+            // the name of the page to return to if the user enters the email (subscribe) 
             hSession.setAttribute("webpg_name", "error_succ.jsp");
             // reseting the sess. var to the default: if the user just did do the subscribe, the form on the NEXT web page DOESN'T NEED 
             // to show the previous values 
@@ -72,58 +73,55 @@
                                 <br />
                                 <br /><br /><br />
                                 <%
-                                    // title, source_name, message - the information passed from the other JSP ( searchDB.jsp or updateDB.jsp )
+                                    // title, source_name, message - the information passed from the other JSP (searchDB.jsp or updateDB.jsp)
                                     // sSource - the text shown on the button and for setting the action in the form tag
                                     
                                     // message - attribute passed from the other web page used to determine the message on the web page
                                     String sMessage = (String)hSession.getAttribute("message");
                                     
                                     // changing the color of error messages to red
-                                    String errStart = "<span class = \"red_text\">";
+                                    String errStart = "<span class=\"red_text\">";
                                     String errEnd = "</span>";
                                     
-                                    out.print("<h1 class = \"red_text\">");
-                                    out.print(sTitle); 
-                                    out.print("</h1>");
-                                    out.print("<br/><br/>");
-                                        
+                                    out.print("<br />");
+                                    out.print("<h3 class=\"text-info\">" + sTitle + "</h3><br /><br />");
                                     if (sMessage.equalsIgnoreCase("ERR_DB")) {
-                                        out.print(errStart + "An error occurred while accessing the database!" +  errEnd); 
+                                        out.print(errStart + "An error occurred" + errEnd + " while accessing the database!"); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_LOGIN")) {   
-                                        out.print(errStart + "The username or password doesn't exist!" + errEnd);
+                                        out.print("The username or password " + errStart + "doesn't exist!" + errEnd );
                                     } else if (sMessage.equalsIgnoreCase("ERR_USER_EXISTS")) {
-                                        out.print(errStart + "The username entered already exists and the user wasn't added to the database!" + errEnd);
+                                        out.print("The username entered " + errStart + "already exists and the user wasn't added" + errEnd + " to the database!");
                                     } else if (sMessage.equalsIgnoreCase("ERR_SIGN_UP")) {
-                                        out.print(errStart + "An error occurred while adding the new user to the database and the user wasn't added!" + errEnd); 
+                                        out.print(errStart + "An error occurred " + errEnd + "while adding the new user to the database and the user wasn't added!"); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_SEARCH")) {
-                                        out.print( errStart + "An error occurred during the search!" + errEnd ); 
+                                        out.print(errStart + "An error occurred" + errEnd + " during the search!"); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_NO_BOOKID")) {
-                                        out.print(errStart + "The book with that title, author and isbn doesn't exist!" + errEnd); 
-                                    } else if (sMessage.equalsIgnoreCase("ERR_NO_AUTHID")){
-                                        out.print(errStart + "The book from that author doesn't exist!" + errEnd); 
+                                        out.print("The book with that title, author and isbn " + errStart + "doesn't exist!" + errEnd); 
+                                    } else if (sMessage.equalsIgnoreCase("ERR_NO_AUTHID")) {
+                                        out.print("The book from that author " + errStart + "doesn't exist!" + errEnd); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_ADD")) {
-                                        out.print(errStart + "An error occurred while adding the book to the database and the book wasn't successfully added to the database!" + errEnd); 
+                                        out.print(errStart + "An error occurred" + errEnd + " while adding the book to the database and the book wasn't successfully added to the database!"); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_UPDATE")) {
-                                        out.print( errStart + "An error occurred while updating the book!" + errEnd ); 
+                                        out.print(errStart + "An error occurred" + errEnd + " while updating the book!"); 
                                     } else if (sMessage.equalsIgnoreCase("ERR_DELETE")) {
-                                        out.print(errStart + "An error occurred while deleting the book!" + errEnd);
+                                        out.print(errStart + "An error occurred" + errEnd + " while deleting the book!");
                                     } else if (sMessage.equalsIgnoreCase("DEL_NO_BOOK")) {
-                                        out.print(errStart + "The book doesn't exist and it couldn't deleted!" + errEnd);
+                                        out.print("The book doesn't exist and " + errStart + "it couldn't deleted!" + errEnd);
                                     } else if (sMessage.equalsIgnoreCase("ERR_ADD_EXISTS")) {
-                                        out.print( errStart + "Error! The book with that ISBN already exists and the book wasn't added to the database!" + errEnd);  
+                                        out.print("The book with that ISBN already exists and " + errStart + "the book wasn't added to the database!" + errEnd);  
                                     } else if (sMessage.equalsIgnoreCase("SUCC_ADD")) {
                                         out.print("The book was successfully added to the database!");       
                                     } else if (sMessage.equalsIgnoreCase("SUCC_UPDATE")) {
                                         out.print("The book was successfully updated in the database!");  
-                                    } else if (sMessage.equalsIgnoreCase( "SUCC_DELETE")) {
+                                    } else if (sMessage.equalsIgnoreCase("SUCC_DELETE")) {
                                         out.print("The book was successfully deleted from the database!");  
-                                    } else if (sMessage.equalsIgnoreCase( "SUCC_SIGN_UP")) {
+                                    } else if (sMessage.equalsIgnoreCase("SUCC_SIGN_UP")) {
                                         out.print("The new user was successfully added to the database!"); 
-                                    } else if (sMessage.equalsIgnoreCase( "SUCC_LOGOUT")) {
+                                    } else if (sMessage.equalsIgnoreCase("SUCC_LOGOUT")) {
                                         out.print("You logged out successfully!");
                                     }
                                     
-                                    // sSource used for setting the action attribute of the form tag ( the page that is loaded when the user clicks the button )
+                                    // sSource used for setting the action attribute of the form tag (the page that is loaded when the user clicks the button)
                                     if (sSource.equalsIgnoreCase("Add Book")) {
                                 %>
                                         <form action="add_page.jsp" method="post">
@@ -148,9 +146,9 @@
                                 %>
                                         <form action="index.jsp" method="post">
                                 <%
-                                    } else if ( sSource.equalsIgnoreCase("Sign Up")) {
+                                    } else if (sSource.equalsIgnoreCase("Sign Up")) {
                                 %>
-                                        <form action="SignUp" method="post" >
+                                        <form action="SignUp" method="post">
                                 <%
                                     }
                                 %>
@@ -158,8 +156,8 @@
                                        sSource = "Home"; // show on the button text Home
                                    }
                                 %>
-                                    <br /><br />
-                                    <!-- adding the To button to the form; btn-sm is used for smaller ( narrower ) size of the control -->
+                                    <br /><br /><br />
+                                    <!-- adding the To button to the form; btn-sm is used for smaller (narrower) size of the control -->
                                     <button type="submit" class="btn btn-info btn-sm"> <%= sSource %></button>
                                 </form>
                                 

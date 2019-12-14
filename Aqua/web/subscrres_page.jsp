@@ -2,6 +2,7 @@
     Document   : subscrres_page
     Created on : 16-Apr-2019, 16:21:18
     Author     : Ingrid Farkas
+    Project    : Aqua Bookstore
 --%>
 
 <!-- subscrres_page.jsp - when the user enters the email in the footer and clicks on the Subscribe button SubscrServl.java is invoked which loads this page  -->
@@ -23,4 +24,3 @@
         <%@ include file="footer.jsp"%>
     </body>
 </html>
-

@@ -1,7 +1,7 @@
 /*
  * author: Ingrid Farkas
  * project: Aqua Bookstore
- * DelServlet.java : handles running the SQL query ( used in upd_del_title.jsp for Delete )
+ * DelServlet.java : handles running the SQL query (used in upd_del_title.jsp for Delete)
  */
 package delservlet;
 
@@ -92,14 +92,14 @@ public class DelServlet extends HttpServlet {
             
             // addBacksl replaces every occurence of \ with \\\\ and replaces every occurence of ' with \\'
             // needed for running the query
-            prev_title = AquaMethods.addBacksl(prev_title);
-            prev_author = AquaMethods.addBacksl(prev_author);
+            // prev_title = AquaMethods.addBacksl(prev_title);
+            // prev_author = AquaMethods.addBacksl(prev_author);
             
             Connection con = ConnectionManager.getConnection(); //connecting to database 
             Statement stmt = con.createStatement();
             
             String query="";
-            String auid=""; // author ID ( column au_id, table author )
+            String auid=""; // author ID (column au_id, table author)
             boolean added_col = false; // whether name of the column was added to the query
             DetermineID idObject = new DetermineID(); // used for invoking the method determineAuthID(author, stmt) 
             
