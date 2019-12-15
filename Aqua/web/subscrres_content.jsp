@@ -46,9 +46,9 @@
                         <div class="row"> <!-- adding a new row to the Bootstrap grid -->
                             <div class="col">
                                 &nbsp; &nbsp;
-                                <br/>
-                                <h1>Subscribe</h1>
-                                <br/> 
+                                <br /><br /><br /><br /><br />
+                                <h3 class="text-info">Subscribe</h3>
+                                <br /><br /> 
                                 <%  HttpSession hSession = AquaMethods.returnSession(request);
                                     hSession.setAttribute("subscribe", "true");
                                     String validEmail = String.valueOf(hSession.getAttribute("valid_email"));
@@ -71,10 +71,10 @@
                                     if ((page_name.equalsIgnoreCase("null")) || (page_name.equalsIgnoreCase("")) || (page_name == null)) 
                                         page_name = "index.jsp";
                                 %>
-                                <br /><br />
                                 
                                 <!-- after clicking on the button the web page is loaded where the user was before clicking on the Subscribe button -->
                                 <form action=<%= page_name %> method="post" > 
+                                    <br /><br /><br />
                                     <!-- adding the button Subscribe, btn-info is used for defining the color of the button,
                                          form-control-sm is used for smaller size of the button -->
                                     <button type="submit" class="btn btn-info btn-sm" id="btnClose">Close</button>

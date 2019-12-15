@@ -230,7 +230,7 @@
                                                 out.print("<li><b>" + sTitle + "</b> by (author) " + sAuthor ); 
                                                 // if there is value for the price : show it
                                                 if (sPrice != null){
-                                                    out.print(" ( <b>price: </b>" + sPrice + " GBP )");
+                                                    out.print(" (<b>price: </b>" + sPrice + " GBP)");
                                                 }
                                                 
                                                 // if there is an ISBN : show it
